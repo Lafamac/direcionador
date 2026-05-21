@@ -1,0 +1,60 @@
+<resources>
+    <string name="centCol">Centralizador da Colhedora</string>
+    <string name="centColDesc">Alinhamento da colhedora</string>
+
+    <string name="potenciometro">Potenciômetro</string>
+    <string name="ultrassonico">Ultrassônico</string>
+    <string name="VL53L0X">VL53L0X</string>
+
+    <string name="angulo">Ângulo</string>
+    <string name="distanciaBarras">Distância entre as barras</string>
+    <string name="distanciaValida">Maior Distância Medida</string>
+    <string name="menorDistancia">Menor Distância Medida</string>
+    <string name="diametro">Diâmetro Médio dos Pés</string>
+    <string name="tempo">Tempo de atualização</string>
+    <string name="anguloMin">Ângulo Mínimo do Sensor</string>
+    <string name="anguloMax">Ângulo Máximo do Sensor</string>
+
+    <string name="intervaloPorcentagem">(0 – 100%)</string>
+    <string name="milimetros">(mm)</string>
+    <string name="graus">(°)</string>
+    <string name="segundos">(s)</string>
+
+    <string name="hintSensibilidade">  Digite a sensibilidade</string>
+    <string name="hintAngulo">Insira o ângulo desejado</string>
+    <string name="hintDistBar">Insira a distância entre as barras</string>
+    <string name="hintDistMin">Insira a menor distância medida</string>
+    <string name="hintDistMax">Insira a maior distância medida</string>
+    <string name="hintDiam">Insira o diâmetro "alvo"</string>
+
+    <string name="tituloGraficoCentralizador">Gráfico de Centralização</string>
+    <string name="apagarDadosGrafico">Apagar Dados Salvos</string>
+
+    <string name="tituloCentralizador">Centralizador da Colhedora</string>
+    <string name="ajusteSensores">Ajuste de Sensores</string>
+
+    <string name="media">Média</string>
+    <string name="moda">Moda</string>
+    <string name="modaMovel">M. Móvel</string>
+    <string name="mediaModa">Média\nModa</string>
+    <string name="buzzer">Buzzer</string>
+
+    <string name="erroMediaModa">Selecione um dos parâmetros.</string>
+
+    <string name="marcarPe">Marcar Pé</string>
+    <string name="apagarDados">Apagar dados</string>
+    <string name="dados">Dados (Tempo e Pé)</string>
+
+    <string name="alerta">Verifique a conexão Wi-Fi ou Resete o sistema.</string>
+
+    <string name="centUtilizarSist">Utilizar Sistema</string>
+    <string name="centPrinTexto">Esse sistema consiste em prover ao operador um auxílio para que a colhedora de café mantenha-se alinhada às plantas durante a colheita.</string>
+    <string name="centAjusPrinTexto">A seguir, o usuário será redirecionado para uma configuração de parâmetros, onde deve-se inserir a distância entre as barras (interior da colhedora), a menor e a maior distância medida pelos sensores.</string>
+
+    <string name="centRelatorioTitulo">Relatório</string>
+    <string name="centRelDesalD">Desalinhamento - Direita: </string>
+    <string name="centRelDesalE">Desalinhamento - Esquerda: </string>
+    <string name="centRelCent">Centralizamento: </string>
+
+    <string name="centIniciarParam">Configurar Parâmetros</string>
+</resources>

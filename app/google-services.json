@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "466585959193",
+    "project_id": "inovaceifa-e51bb",
+    "storage_bucket": "inovaceifa-e51bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466585959193:android:5e57cca6a92ac3fcd06388",
+        "android_client_info": {
+          "package_name": "com.example.flowcalibration2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466585959193-k0o54ol65a1tumau75kipvb37rqr3f2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrzb1uwKPvXPVKx9Zsgk0CBbck3MDtT-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466585959193-k0o54ol65a1tumau75kipvb37rqr3f2m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466585959193:android:46a8adf6ba7af206d06388",
+        "android_client_info": {
+          "package_name": "com.example.inovaceifa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466585959193-k0o54ol65a1tumau75kipvb37rqr3f2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrzb1uwKPvXPVKx9Zsgk0CBbck3MDtT-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466585959193-k0o54ol65a1tumau75kipvb37rqr3f2m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

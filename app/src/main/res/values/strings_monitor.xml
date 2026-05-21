@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="monAnim">Monitor Animal</string>
+    <string name="monAnimDesc">Dados e estatísticas</string>
+</resources>

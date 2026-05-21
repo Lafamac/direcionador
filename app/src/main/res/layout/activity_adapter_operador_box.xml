@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CamposDeTexto"
+    android:id="@+id/operadorBox"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+  <com.google.android.material.imageview.ShapeableImageView
+      android:id="@+id/gerCad_foto"
+      app:shapeAppearanceOverlay="@style/imagemArredondada"
+      android:layout_width="90dp"
+      android:layout_height="90dp"
+      android:layout_margin="12dp"
+      android:scaleType="centerCrop"
+      android:src="@drawable/icone_gleba_padrao"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.016"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+  <TextView
+      android:id="@+id/centSens_ajuste"
+      style="@style/textoBoldBlack"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="20dp"
+      android:autoSizeMinTextSize="8sp"
+      android:autoSizeTextType="uniform"
+      android:text="@string/defaultMsgNotImplemented"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintBottom_toTopOf="@+id/gerCad_detalhes"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHeight_percent="0.2"
+      app:layout_constraintStart_toEndOf="@+id/gerCad_foto"
+      app:layout_constraintTop_toBottomOf="@id/gerCad_num"
+      app:layout_constraintWidth_percent="0.5" />
+
+  <TextView
+      android:id="@+id/gerCad_num"
+      style="@style/textoBoldBlack"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginStart="20dp"
+      android:autoSizeTextType="uniform"
+      android:text="@string/defaultMsgNotImplemented"
+      app:layout_constraintBottom_toTopOf="@+id/centSens_ajuste"
+      app:layout_constraintHeight_percent="0.25"
+      app:layout_constraintStart_toEndOf="@+id/gerCad_foto"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintWidth_percent="0.4" />
+
+  <Button
+      android:id="@+id/gerCad_detalhes"
+      style="@style/textoBotoes"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_margin="8dp"
+      android:text="@string/botaoDetalhes"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.976"
+      app:layout_constraintStart_toEndOf="@+id/gerCad_foto"
+      app:layout_constraintTop_toBottomOf="@id/centSens_ajuste" />
+
+  <ImageButton
+      android:id="@+id/gerCad_apagar"
+      style="@style/FundoSobreImagem"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:layout_margin="8dp"
+      android:scaleType="centerCrop"
+      android:src="@drawable/x_cinza"
+      app:layout_constraintBottom_toBottomOf="@+id/gerCad_foto"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.900"
+      app:layout_constraintStart_toEndOf="@+id/gerCad_num"
+      app:layout_constraintTop_toTopOf="@+id/gerCad_foto"
+      app:layout_constraintVertical_bias="0.066" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

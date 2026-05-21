@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_sistema.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_sistema.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_selecao_produto_novo.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_selecao_produto_novo.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_conta_pes.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_conta_pes.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_resultados.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_resultados.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_edicao_dados.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_edicao_dados.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_grafico.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_grafico.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_tela_operador.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_tela_operador.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/dialog_confirm.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/dialog_confirm.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_ajustes.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_ajustes.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/dialog_warning.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/dialog_warning.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/dialog_options.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/dialog_options.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_relatorio.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_relatorio.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_sistema2.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_sistema2.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_inicial.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_inicial.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/dialog_insert.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/dialog_insert.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_ajustes_principal.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_ajustes_principal.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_adapter_operador_box.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_adapter_operador_box.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout/activity_centralizador_cadastro.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout/activity_centralizador_cadastro.xml"
+    }
+]

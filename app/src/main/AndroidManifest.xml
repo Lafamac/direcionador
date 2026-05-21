@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.inovaceifa"> <!-- Adicionado o pacote para alinhar com o namespace -->
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_logo"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_logo_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
+
+        <!-- Activity Inicial (Launcher) -->
+        <activity
+            android:name=".Inicial"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Activities do Centralizador -->
+        <activity
+            android:name=".Centralizador.CentralizadorPrincipal"
+            android:exported="false" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorResultados"
+            android:exported="false" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorEdicaoDados"
+            android:exported="false" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorTelaOperador"
+            android:exported="false" />
+
+        <activity
+            android:name=".Centralizador.AdapterOperadorBox"
+            android:exported="false" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorCadastro"
+            android:exported="false" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorAjustesPrincipal"
+            android:exported="false" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorRelatorio"
+            android:exported="false" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorSistema2"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorContaPes"
+            android:exported="false" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorAjustes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".SelecaoProduto"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorSistema"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".Centralizador.CentralizadorGrafico"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+    </application>
+
+</manifest>

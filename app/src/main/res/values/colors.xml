@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name = "purple_200">#FFBB86FC</color>
+    <color name = "purple_500">#454545</color>
+    <color name = "purple_700">#5427252B</color>
+    <color name = "teal_200">#FF03DAC5</color>
+    <color name = "teal_700">#FF018786</color>
+    <color name = "black">#FF000000</color>
+    <color name = "white">#FFFFFFFF</color>
+    <!-- Paleta de cores - CEIFA -->
+    <color name = "color_1">#2B4798</color>
+    <color name = "color_2">#007139</color>
+    <color name = "color_3">#F59D08</color>
+    <color name = "color_4">#BCAD99</color>
+    <color name = "color_5">#FFFFFF</color>
+    <color name = "color_6">#000000</color>
+    <color name = "color_7">#686868</color>
+    <color name = "color_8">#EFEFEF</color>
+    <color name = "color_9">#F5F1EE</color>
+    <color name = "color_10">#F6F6F6</color>
+    <!-- Cores - Visual -->
+    <color name = "branco">#E8E1E1</color>
+    <color name = "cinza_botao">#494D52</color>
+    <color name = "teste_branco_gelo">#E4E2D7</color>
+    <color name = "preto">#FD433F3F</color>
+    <color name = "verde_marcelo">#48b493</color>
+    <color name = "verde_botoes"> #00c887</color>
+    <color name = "vermelho_erro">#ff4e5f</color>
+    <color name = "preto_botao">#212020</color>
+    <color name = "verde_botoes_transp">#AE00C887</color>
+
+    <!-- Cores - Gerenciador -->
+    <color name = "cinzaSeco">#a9a9a9</color>
+    <color name = "cinzaClaro">#d3d3d3</color>
+    <color name = "botoes"> #085896</color>
+
+    <!-- Paleta - Makreis -->
+    <color name="Mred_100">#BB373F</color>
+    <color name="Mblue_100">#80ACCC</color>
+    <color name="Mblue_200">#7CA4CC</color>
+    <color name="Mblue_300">#256BA2</color>
+    <color name="Mblue_400">#085896</color>
+    <color name="Mgray_100">#CDD6DE</color>
+    <color name="Mgray_200">#698399</color>
+    <color name="Mgray_300">#4C4C4C</color>
+    <color name="Mblack_700">#222222</color>
+
+    <color name="ap_gray">#888888</color>
+    <color name="transparente">#00000000</color>
+
+    <color name="red">#FF0000</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="dark_green">#006400</color>
+    <color name="bright_green">#00FF00</color>
+
+
+</resources>

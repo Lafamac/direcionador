@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">INOVA CEIFA</string>
+    <string name="title_activity_selecao_do_equipamento">SelecaoDoEquipamento</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="logocase">case</string>
+
+    <string name="inovacaoMec">INOVAÇÃO EM MECANIZAÇÃO AGRÍCOLA</string>
+    <string name="ceifa">Inovação em Mecanização Agrícola Ceifa</string>
+    <string name="descricao">Descrição</string>
+    <string name="produtos">Produtos</string>
+    <string name="resultados">Resultados</string>
+
+    <string name="defaultTitleNotImplemented">Must implement title</string>
+    <string name="defaultMsgNotImplemented">Must implement message</string>
+    <string name="defaultHintNotImplemented">Must implement hint</string>
+    <string name="defaultMissingContent">Missing Content</string>
+    <string name="defaultError">Ops! Alguma coisa deu errado.</string>
+    <string name="defaultWeight">0 g</string>
+    <string name="defaultForce">0.0N\n-</string>
+
+    <string name="botaoTentarNovamente">Tentar Novamente</string>
+    <string name="botaoMedicao">Iniciar Medição</string>
+    <string name="botaoMedicoes">Iniciar Medições</string>
+    <string name="botaoConfirmarMedicao">Confirmar Medição</string>
+    <string name="botaoConfirmar">Confirmar</string>
+    <string name="botaoCancelar">Cancelar</string>
+    <string name="botaoVoltar">Voltar</string>
+    <string name="botaoIniciar">Iniciar</string>
+    <string name="botaoAvancar">Avançar</string>
+    <string name="botaoGrafico">Gráfico</string>
+    <string name="botaoPausar">Pausar</string>
+    <string name="botaoProximo">Próximo</string>
+    <string name="botaoEditar">Editar</string>
+    <string name="botaoVerDetalhes">Ver detalhes</string>
+    <string name="botaoDetalhes">Detalhes</string>
+    <string name="botaoSalvarResultados">Salvar Resultados</string>
+    <string name="botaoFinalizar">Finalizar</string>
+    <string name="botaoAlterarImagem">Alterar Imagem</string>
+    <string name="botaoMaisResultados">Mais Resultados </string>
+
+    <string name="selecionarOpcao">      Selecione uma Opção</string>
+    <string name="digiteAqui">Digite aqui…</string>
+    <string name="centAdminMode">Área do Administrador</string>
+    <string name="Operadores">Operadores</string>
+    <string name="manobra">Manobra</string>
+
+</resources>

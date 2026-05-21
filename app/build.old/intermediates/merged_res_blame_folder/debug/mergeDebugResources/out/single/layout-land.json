@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout-land/activity_selecao_produto_novo.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout-land/activity_selecao_produto_novo.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout-land/activity_inicial.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout-land/activity_inicial.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout-land/activity_centralizador_ajustes.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout-land/activity_centralizador_ajustes.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout-land/activity_centralizador_relatorio.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout-land/activity_centralizador_relatorio.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout-land/activity_centralizador_ajustes_principal.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout-land/activity_centralizador_ajustes_principal.xml"
+    },
+    {
+        "merged": "com.example.inovaceifa.app-mergeDebugResources-4:/layout-land/activity_centralizador_principal.xml",
+        "source": "com.example.inovaceifa.app-main-7:/layout-land/activity_centralizador_principal.xml"
+    }
+]

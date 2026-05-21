@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="variedades">
+        <item>Mundo Novo</item>
+        <item>Catuaí</item>
+        <item>Catucaí</item>
+        <item>Acaiá</item>
+        <item>Icatu</item>
+        <item>Topázio</item>
+        <item>Rubi</item>
+        <item>Obatã</item>
+        <item>Outros</item>
+    </string-array>
+
+    <string-array name="colhedoras">
+        <item>KTR</item>
+        <item>Matão</item>
+        <item>Matão Tracionada</item>
+        <item>Korvan</item>
+        <item>CASE</item>
+        <item>CASE Tracionada</item>
+        <item>K3</item>
+        <item>TDI</item>
+        <item>TDI Tracionada</item>
+        <item>Vetor</item>
+    </string-array>
+</resources>

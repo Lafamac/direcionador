@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--- colocar a fonte no "mensagemErro", "tituloErro", erroSoma e Button-->
+    <!--- android:fontFamily="@font/raleway_bold"-->
+    <!--- android:fontFamily="@font/raleway"-->
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/erro" />
+
+    <TextView
+        style="@style/textoBoldRed"
+        android:id="@+id/warnBox_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/defaultTitleNotImplemented"
+        android:textSize="22sp"
+        android:textAlignment="center"/>
+
+    <TextView
+        style="@style/textoNormalBlack"
+        android:id="@+id/warnBox_msg1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/defaultMsgNotImplemented"
+        android:textSize="18sp" />
+
+    <TextView
+        style="@style/textoNormalBlack"
+        android:id="@+id/warnBox_msg2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/defaultMsgNotImplemented"
+        android:textSize="18sp"/>
+
+    <Button
+        style="@style/textoBrancoBold"
+        android:id="@+id/warnBox_button"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/botao_sensibilidade"
+        android:text="@string/botaoTentarNovamente"
+        android:textSize="18sp" />
+
+</LinearLayout>

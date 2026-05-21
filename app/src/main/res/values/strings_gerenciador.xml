@@ -1,0 +1,42 @@
+<resources>
+    <string name="gerCol">Gerenciador de Colheita</string>
+    <string name="gerColDesc">Aproveitamento e produtividade</string>
+    <string name="gerLocal">Nome da Operador</string>
+    <string name="gerDesc">Descrição da Operador</string>
+
+    <string name="gerTextoInicial">O primeiro passo para a configuração do Gerenciador é a entrada de informações relevantes sobre a colheita e o registro de algumas glebas.</string>
+    <string name="gerTextoPreMedicao">A última etapa para a obtenção dos parâmetros de colheita é a medição da força de desprendimento de alguns frutos. Serão apresentadas as instruções para esta medição</string>
+    <string name="gerTextoNenhumaGleba"> Nenhum registro.\n Use o botão \"Adicionar Operador" para cadastrar um novo operador.</string>
+
+    <string name="gerCadastroGlebas">Cadastro</string>
+    <string name="gerHistoricoGlebas">Histórico</string>
+    <string name="gerHintPesquisaGlebas">Buscar Operadores</string>
+    <string name="gerBotaoAddGleba">Adicionar Operador</string>
+    <string name="gerVoltarCadastro">Voltar para o Cadastro de Operadores</string>
+    <string name="gerEfetuarAvaliacao">Efetuar Avaliação</string>
+    <string name="gerVerHistorico">Ver Histórico</string>
+
+    <string name="gerMedicaoDesprendimento">Medição de Desprendimento</string>
+    <string name="gerForcaDesprendimento">Força de Desprendimento</string>
+    <string name="gerMinLimForca">0 N</string>
+    <string name="gerMaxLimForca">16 N</string>
+
+    <string name="gerDadosLavoura">Dados da Lavoura</string>
+    <string name="gerEtapa1">  Etapa 1</string>
+    <string name="gerEtapa2">  Etapa 2</string>
+    <string name="gerResultados">  Resultados</string>
+
+    <string name="gerIniciarBalanca">Iniciar Modo Balança</string>
+    <string name="gerPararBalanca">Parar Modo Balança</string>
+    <string name="gerModoBalanca">Modo Balança</string>
+
+    <string name="gerDigitarLocal">Digite o nome do operador</string>
+
+    <string name="gerLocalGleba">Localização de trabalho do operador</string>
+
+    <string name="zero">0</string>
+    <string name="gerContFrutContaFrutos">Contagem de frutos</string>
+
+    <string name="gerEditarTitulo">Editar dados do Operador</string>
+
+</resources>

@@ -1,0 +1,25 @@
+<resources>
+    <string name="importarDados">Deseja importar dados já cadastrados?</string>
+    <string name="tituloImportarDados">Importar Dados</string>
+
+    <string name="tituloDeletarDados">Deletar Dados?</string>
+    <string name="deletarDados">Os dados serão deletados permanentemente.</string>
+
+    <string name="tituloSairPagina">Deseja sair?</string>
+    <string name="sairPagina">Todas as alterações serão perdidas.</string>
+    <string name="sairMedicao">Todas as medições realizadas serão perdidas</string>
+
+    <string name="tituloMedicaoNaoRealizada">Medições não realizadas</string>
+    <string name="medicaoNaoRealizada">Não foram realizadas medições para essa gleba.</string>
+
+    <string name="tituloErrosDetectados">Erros detectados</string>
+    <string name="msgErrosParametros">Todos os campos devem ser preenchidos.\n\nVerifique se está tudo de acordo.</string>
+
+    <string name="msgImportarPorcentagens">Deseja importar as porcentagens já cadastradas?</string>
+    <string name="tituloImportarPorcentagens">Importar Porcentagens</string>
+
+    <string name="contagemConfirm">Deseja avançar?</string>
+    <string name="contagemConfirmText">Não será possível retornar à instrução atual.</string>
+
+    <string name="msgErroWifi">O dispositivo deve estar conectado na rede MAKREIS-GERENCIADOR.\n\nVerifique a conexão.</string>
+</resources>
