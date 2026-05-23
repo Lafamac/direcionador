@@ -50,6 +50,8 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
     private boolean reiniciar = true;
     private boolean tps;
     private float tempo;
+    private int habilitaScroll;
+    private float tempoFixo;
     private final int sufixo_IP = 200;
     private int angulo, distBarra, distMax, distMin, diam;
     private final int som = R.raw.sound;
@@ -123,7 +125,15 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
 
     private void inicializaVariaveis(CentralizadorParametros cent) {
         if (cent != null) {
-            tempo = cent.getTempoAtt() * 1000;
+            habilitaScroll = cent.getHabilitaScrollTempo();
+            tempoFixo = cent.getTempoFixo();
+            
+            if (habilitaScroll == 1) {
+                tempo = cent.getTempoAtt() * 1000;
+            } else {
+                tempo = tempoFixo * 1000;
+            }
+            
             angulo = cent.getAngulo();
             distBarra = cent.getDistBarra();
             distMax = cent.getDistMax();
@@ -218,8 +228,14 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
         int progress = (int) ((tempo - 1000) / 100);
         barraTempo.setProgress(progress);
 
-        // Habilita a barra para que o usuário consiga interagir
-        barraTempo.setEnabled(true);
+        // Habilita ou desabilita a barra conforme configuração de parâmetros
+        if (habilitaScroll == 1) {
+            barraTempo.setEnabled(true);
+            barraTempo.setAlpha(1.0f);
+        } else {
+            barraTempo.setEnabled(false);
+            barraTempo.setAlpha(0.5f); // Deixa visualmente "apagada"
+        }
 
         barraTempo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

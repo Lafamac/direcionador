@@ -32,7 +32,7 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
 
     //Informações inerentes ao banco de dados, tais quais seu nome e sua versão.
     private static final String DATABASE_NAME = "CEIFA_Database3.0";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     //Tabelas presentes no banco de dados.
     private static final String TABLE_OPERADOR = "gerenciador";
@@ -94,6 +94,8 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
     private static final String KEY_CENT_MAIOR_DISTANCIA = "maiorDistancia";
     private static final String KEY_CENT_DIAMETRO = "diametro";
     private static final String KEY_CENT_TEMPO_ATT = "tempoAtt";
+    private static final String KEY_CENT_HABILITA_SCROLL = "habilitaScrollTempo";
+    private static final String KEY_CENT_TEMPO_FIXO = "tempoFixo";
     private static final String KEY_CENT_PATH_1 = "filePath1";
     private static final String KEY_CENT_PATH_2 = "filePath2";
     private static final String KEY_CENT_PATH_3 = "filePath3";
@@ -182,21 +184,14 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion != newVersion) {
-            if (oldVersion == 1) {
-                switch (newVersion) {
-                    case 2:
-                        System.out.println("Versão anterior: " + oldVersion);
-                        System.out.println("Versão atual: " + newVersion);
-                }
+        if(oldVersion < 2) {
+            try {
+                db.execSQL("ALTER TABLE " + TABLE_CENTRALIZADOR + " ADD COLUMN " + KEY_CENT_HABILITA_SCROLL + " INTEGER DEFAULT 1");
+                db.execSQL("ALTER TABLE " + TABLE_CENTRALIZADOR + " ADD COLUMN " + KEY_CENT_TEMPO_FIXO + " REAL DEFAULT 1.3");
+            } catch (Exception e) {
+                Log.e(TAG, "Erro ao atualizar banco de dados para versão 2: " + e.getMessage());
             }
         }
-
-        /*
-            Modelo para atualização de tabelas (para cada nova coluna):
-            db.execSQL("ALTER TABLE " + nome da tabela + " ADD COLUMN " + key da nova coluna +
-            tipo dos dados (Exemplo: " TEXT");
-         */
     }
 
     /**
@@ -214,6 +209,8 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
                 KEY_CENT_MAIOR_DISTANCIA + " INTEGER," +
                 KEY_CENT_DIAMETRO + " INTEGER," +
                 KEY_CENT_TEMPO_ATT + " REAL," +
+                KEY_CENT_HABILITA_SCROLL + " INTEGER," +
+                KEY_CENT_TEMPO_FIXO + " REAL," +
                 KEY_CENT_PATH_1 + " TEXT," +
                 KEY_CENT_PATH_2 + " TEXT," +
                 KEY_CENT_PATH_3 + " TEXT," +
@@ -798,6 +795,8 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
         cent.setDistMax(cursor.getInt(cursor.getColumnIndex(KEY_CENT_MAIOR_DISTANCIA)));
         cent.setDiametroMedio(cursor.getInt(cursor.getColumnIndex(KEY_CENT_DIAMETRO)));
         cent.setTempoAtt(cursor.getFloat(cursor.getColumnIndex(KEY_CENT_TEMPO_ATT)));
+        cent.setHabilitaScrollTempo(cursor.getInt(cursor.getColumnIndex(KEY_CENT_HABILITA_SCROLL)));
+        cent.setTempoFixo(cursor.getFloat(cursor.getColumnIndex(KEY_CENT_TEMPO_FIXO)));
 
         //cent.setDia(cursor.getString(cursor.getColumnIndex(KEY_CENT_DIA_INICIO)));
         //cent.setDiaFinal(cursor.getString(cursor.getColumnIndex(KEY_CENT_DIA_FIM)));
@@ -827,6 +826,8 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
         values.put(KEY_CENT_MAIOR_DISTANCIA, cent.getDistMax());
         values.put(KEY_CENT_DIAMETRO, cent.getDiametroMedio());
         values.put(KEY_CENT_TEMPO_ATT, cent.getTempoAtt());
+        values.put(KEY_CENT_HABILITA_SCROLL, cent.getHabilitaScrollTempo());
+        values.put(KEY_CENT_TEMPO_FIXO, cent.getTempoFixo());
 
         values.put(KEY_CENT_PATH_1, cent.getFile1());
         values.put(KEY_CENT_PATH_2, cent.getFile2());
@@ -860,6 +861,8 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
         values.put(KEY_CENT_MAIOR_DISTANCIA, cent.getDistMax());
         values.put(KEY_CENT_DIAMETRO, cent.getDiametroMedio());
         values.put(KEY_CENT_TEMPO_ATT, cent.getTempoAtt());
+        values.put(KEY_CENT_HABILITA_SCROLL, cent.getHabilitaScrollTempo());
+        values.put(KEY_CENT_TEMPO_FIXO, cent.getTempoFixo());
 
         return mWritableDB.update(TABLE_CENTRALIZADOR, values, KEY_CENT_ID + "= ?",
                 new String[]{String.valueOf(cent.getID())});

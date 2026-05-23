@@ -693,7 +693,7 @@
             style="@style/CamposDeTexto"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/centAjus_space11"
+            app:layout_constraintBottom_toTopOf="@+id/centAjus_block_scroll"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/centAjus_temp"
@@ -740,15 +740,68 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/centAjus_block_scroll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/centAjus_block6"
+            app:layout_constraintWidth_percent="0.8">
+
+            <TextView
+                android:id="@+id/centAjus_textScroll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Liberar Scroll para Operador"
+                style="@style/textoBoldBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintWidth_percent="0.7"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/centAjus_swHabilitaScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:checked="true" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/centAjus_block_tempFixo"
+            style="@style/CamposDeTexto"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/centAjus_block_scroll"
+            app:layout_constraintHeight_percent="0.085"
+            app:layout_constraintWidth_percent="0.8">
+
+            <EditText
+                android:id="@+id/centAjus_fieldTempoFixo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/ap_transparent"
+                android:hint="Tempo Fixo (1.0 a 1.5)"
+                android:textSize="15sp"
+                android:inputType="numberDecimal"
+                android:maxLength="4"
+                android:paddingStart="10dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <Space
-            android:id="@+id/centAjus_space11"
+            android:id="@+id/centAjus_space_final"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.04"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/centAjus_block6" />
+            app:layout_constraintTop_toBottomOf="@id/centAjus_block_tempFixo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

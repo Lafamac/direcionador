@@ -61,6 +61,16 @@ public class CentralizadorParametros {
     private float tempoAtt;
 
     /**
+     * {@link Integer} - Define se o operador pode alterar o tempo pela barra de rolagem (1 = Sim, 0 = Não).
+     */
+    private int habilitaScrollTempo;
+
+    /**
+     * {@link Float} - Tempo fixo a ser utilizado caso o scroll esteja desabilitado.
+     */
+    private float tempoFixo;
+
+    /**
      * {@link String} - Nome do primeiro arquivo contendo dados no sistema, obedecendo um limite pré-definido.
      */
     private String file1;
@@ -207,6 +217,38 @@ public class CentralizadorParametros {
      */
     public void setTempoAtt(float tempoAtt) {
         this.tempoAtt = tempoAtt;
+    }
+
+    /**
+     * Método Get() para a habilitação do scroll de tempo.
+     * @return 1 se habilitado, 0 se desabilitado.
+     */
+    public int getHabilitaScrollTempo() {
+        return habilitaScrollTempo;
+    }
+
+    /**
+     * Método Set() para a habilitação do scroll de tempo.
+     * @param habilitaScrollTempo 1 para habilitar, 0 para desabilitar.
+     */
+    public void setHabilitaScrollTempo(int habilitaScrollTempo) {
+        this.habilitaScrollTempo = habilitaScrollTempo;
+    }
+
+    /**
+     * Método Get() para o tempo fixo.
+     * @return Retorna o tempo fixo definido.
+     */
+    public float getTempoFixo() {
+        return tempoFixo;
+    }
+
+    /**
+     * Método Set() para o tempo fixo.
+     * @param tempoFixo Seta o tempo fixo a ser utilizado.
+     */
+    public void setTempoFixo(float tempoFixo) {
+        this.tempoFixo = tempoFixo;
     }
 
     /**

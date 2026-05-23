@@ -195,22 +195,29 @@ public class CentralizadorAjustes extends AppCompatActivity implements DialogWar
      */
     private SwitchCompat tps;
 
+    /**
+     * {@link SwitchCompat} - Define se o operador pode mudar o tempo pela barra de rolagem.
+     */
+    private SwitchCompat sw_habilitaScroll;
+
+    /**
+     * {@link EditText} - Campo de digitação para o tempo fixo.
+     */
+    private EditText campo_tempoFixo;
+
     //----------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_centralizador_ajustes);
         
-        // Garante que a tela de ajustes rode apenas na horizontal se possível
-        // setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
         UDP = new UDPProtocol();
 
         centAjusHelper = HelperDatabaseSQL.getInstance(this);
 
         iniciarComponentes();
 
-        //verificaPreenchido();
+        carregarDados();
 
         configTps();
 
@@ -253,6 +260,29 @@ public class CentralizadorAjustes extends AppCompatActivity implements DialogWar
         ok_temp = findViewById(R.id.centAjus_okTempo);
 
         tps = findViewById(R.id.centSens_tps);
+        sw_habilitaScroll = findViewById(R.id.centAjus_swHabilitaScroll);
+        campo_tempoFixo = findViewById(R.id.centAjus_fieldTempoFixo);
+    }
+
+    private void carregarDados() {
+        cent = centAjusHelper.searchAjustes(1);
+        if (cent != null) {
+            campo_angulo.setText(String.valueOf(cent.getAngulo()));
+            campo_distBarra.setText(String.valueOf(cent.getDistBarra()));
+            campo_distMin.setText(String.valueOf(cent.getDistMin()));
+            campo_distMax.setText(String.valueOf(cent.getDistMax()));
+            campo_diam.setText(String.valueOf(cent.getDiametroMedio()));
+            campo_temp.setText(String.valueOf(cent.getTempoAtt()));
+            sw_habilitaScroll.setChecked(cent.getHabilitaScrollTempo() == 1);
+            campo_tempoFixo.setText(String.valueOf(cent.getTempoFixo()));
+            
+            angulo = cent.getAngulo();
+            distBarra = cent.getDistBarra();
+            distMin = cent.getDistMin();
+            distMax = cent.getDistMax();
+            diam = cent.getDiametroMedio();
+            temp = cent.getTempoAtt();
+        }
     }
 
     /**
@@ -386,16 +416,22 @@ public class CentralizadorAjustes extends AppCompatActivity implements DialogWar
     private void configContinuar() {
         continuar.setOnClickListener(view -> {
 
-            //angulo = conferirNumero(campo_angulo);
+            angulo = conferirNumero(campo_angulo);
             distBarra = conferirNumero(campo_distBarra);
             distMin = conferirNumero(campo_distMin);
             distMax = conferirNumero(campo_distMax);
             diam = conferirNumero(campo_diam);
             temp = MMath.StringParaFloat(campo_temp.getText().toString(), 0.0f);
+            float tempoFixo = MMath.StringParaFloat(campo_tempoFixo.getText().toString(), 1.3f);
 
             Log.d(TAG, "entroou aq");
 
             if (tudo_preenchido()) {
+                if (tempoFixo < 1.0f || tempoFixo > 1.5f) {
+                    texto = "O tempo fixo deve estar entre 1.0 e 1.5 segundos.";
+                    caixaAviso();
+                    return;
+                }
                 /*Thread t = new Thread(() -> {
                     enviar("angulo:", angulo);
                     pausarThread();
@@ -550,6 +586,7 @@ public class CentralizadorAjustes extends AppCompatActivity implements DialogWar
                     || (campo_distMax.getText().toString().equals(""))
                     || (campo_diam.getText().toString().equals(""))
                     || (campo_temp.getText().toString().equals(""))
+                    || (campo_tempoFixo.getText().toString().equals(""))
                     ){
                 texto = "Todos os campos precisam ser preenchidos.\n";
                 return false;
@@ -584,12 +621,14 @@ public class CentralizadorAjustes extends AppCompatActivity implements DialogWar
         CentralizadorParametros cent1 = new CentralizadorParametros();
 
         cent1.setID(1);
-        cent1.setAngulo(anguloDefault);
+        cent1.setAngulo(angulo);
         cent1.setDiametroMedio(diam);
         cent1.setTempoAtt(temp);
         cent1.setDistBarra(distBarra);
         cent1.setDistMin(distMin);
         cent1.setDistMax(distMax);
+        cent1.setHabilitaScrollTempo(sw_habilitaScroll.isChecked() ? 1 : 0);
+        cent1.setTempoFixo(MMath.StringParaFloat(campo_tempoFixo.getText().toString(), 1.3f));
 
         if (centAjusHelper.searchAjustes(1) == null) {
             centAjusHelper.addCent(cent1);
