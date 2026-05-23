@@ -34,7 +34,7 @@
         <!-- Activities do Centralizador -->
         <activity
             android:name=".Centralizador.CentralizadorPrincipal"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".Centralizador.CentralizadorResultados"
@@ -72,7 +72,7 @@
 
         <activity
             android:name=".Centralizador.CentralizadorAjustes"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="landscape" />
 
         <activity
@@ -82,7 +82,7 @@
 
         <activity
             android:name=".Centralizador.CentralizadorSistema"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="landscape" />
 
         <activity
