@@ -200,6 +200,9 @@ public class CentralizadorAjustes extends AppCompatActivity implements DialogWar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_centralizador_ajustes);
+        
+        // Garante que a tela de ajustes rode apenas na horizontal se possível
+        // setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         UDP = new UDPProtocol();
 

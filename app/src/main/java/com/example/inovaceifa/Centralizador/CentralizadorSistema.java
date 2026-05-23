@@ -162,7 +162,19 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
         setaEsquerda = findViewById(R.id.imageView2);
         setaDireita = findViewById(R.id.imageView3);
 
-        l = new CentralizadorLEDs(imagens);
+        imagens = new ImageView[]{
+                findViewById(R.id.centSist_led1), findViewById(R.id.centSist_led2),
+                findViewById(R.id.centSist_led3), findViewById(R.id.centSist_led4),
+                findViewById(R.id.centSist_led5), findViewById(R.id.centSist_led6),
+                findViewById(R.id.centSist_ledCentral),
+                findViewById(R.id.centSist_led7), findViewById(R.id.centSist_led8),
+                findViewById(R.id.centSist_led9), findViewById(R.id.centSist_led10),
+                findViewById(R.id.centSist_led11), findViewById(R.id.centSist_led12)
+        };
+        ImageView setaE = findViewById(R.id.centSist_setaEsquerda);
+        ImageView setaD = findViewById(R.id.centSist_setaDireita);
+
+        l = new CentralizadorLEDs(imagens, setaD, setaE);
     }
 
     private void configRestartESP() { }
@@ -262,11 +274,42 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
     @Override
     public void run() {
         while (controle_Thread.get()) {
+            if (rodando) {
+                executarUDP();
+            }
             try {
                 Thread.sleep((long) tempo);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
+        }
+    }
+
+    private void executarUDP() {
+        if (random.isChecked()) {
+            // MODO SIMULAÇÃO: Gera um valor aleatório entre -6 e 6
+            int valSimulado = (int) (Math.random() * 13) - 6;
+            recebido = String.valueOf(valSimulado);
+            Log.d(TAG, "Simulação Ativa - Valor: " + recebido);
+        } else {
+            // Fluxo UDP Real
+            recebido = UDP.enviarEReceber(comando, 1234, this);
+        }
+
+        if (recebido != null && !recebido.isEmpty()) {
+            runOnUiThread(() -> {
+                try {
+                    // Atualiza os LEDs com o valor recebido
+                    l.leds(recebido);
+                    
+                    // Log opcional para debug
+                    Log.d(TAG, "Interface atualizada com: " + recebido);
+                } catch (Exception e) {
+                    Log.e(TAG, "Erro ao atualizar interface: " + e.getMessage());
+                }
+            });
+        } else {
+            Log.w(TAG, "Nenhuma resposta recebida do ESP32 (Timeout)");
         }
     }
 
@@ -292,6 +335,18 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
         manobra.setOnCheckedChangeListener((b, isChecked) -> {
             if (isChecked) { l.apagaSetas(); l.apagaLEDs(); }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopThread();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopThread();
     }
 
     @Override

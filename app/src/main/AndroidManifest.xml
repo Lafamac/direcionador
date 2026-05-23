@@ -48,9 +48,6 @@
             android:name=".Centralizador.CentralizadorTelaOperador"
             android:exported="false" />
 
-        <activity
-            android:name=".Centralizador.AdapterOperadorBox"
-            android:exported="false" />
 
         <activity
             android:name=".Centralizador.CentralizadorCadastro"

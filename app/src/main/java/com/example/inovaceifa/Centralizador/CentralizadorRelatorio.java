@@ -146,9 +146,7 @@ public class CentralizadorRelatorio extends AppCompatActivity {
      */
     private void configFinalizar() {
         finalizar.setOnClickListener(v -> {
-            Intent intent = new Intent(CentralizadorRelatorio.this, CentralizadorPrincipal.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            finish(); // Apenas fecha a tela para voltar para a tela de Administração
         });
     }
 

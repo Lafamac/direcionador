@@ -128,6 +128,46 @@ public class UDPProtocol extends AppCompatActivity {
     }
 
     /**
+     * Envio e recebimento síncrono de mensagens UDP.
+     * @param mensagem Mensagem a ser enviada.
+     * @param UDP_SERVER_PORT Porta do servidor.
+     * @param context Contexto para obter o gateway.
+     * @return Resposta recebida ou null se falhar/timeout.
+     */
+    public String enviarEReceber(String mensagem, int UDP_SERVER_PORT, Context context) {
+        String gateway = Gateway.getGateway(context);
+        return sendAndReceiveUDP(mensagem, UDP_SERVER_PORT, gateway);
+    }
+
+    private String sendAndReceiveUDP(String mensagem, int UDP_SERVER_PORT, String gateway) {
+        DatagramSocket sds = null;
+        try {
+            sds = new DatagramSocket();
+            sds.setSoTimeout(1000); // Timeout de 1 segundo
+            InetAddress serverAddr = InetAddress.getByName(gateway);
+            
+            byte[] sendData = mensagem.getBytes(StandardCharsets.UTF_8);
+            DatagramPacket sdp = new DatagramPacket(sendData, sendData.length, serverAddr, UDP_SERVER_PORT);
+            sds.send(sdp);
+
+            byte[] buf = new byte[1024];
+            DatagramPacket rdp = new DatagramPacket(buf, buf.length);
+            sds.receive(rdp);
+            
+            String resposta = new String(rdp.getData(), rdp.getOffset(), rdp.getLength(), StandardCharsets.UTF_8);
+            Log.d(TAG, "UDP Recebido: " + resposta);
+            return resposta;
+        } catch (IOException e) {
+            Log.e(TAG, "Erro UDP: " + e.getMessage());
+            return null;
+        } finally {
+            if (sds != null) {
+                sds.close();
+            }
+        }
+    }
+
+    /**
      * Método Get() para obter a mensagem recebida pelo ESP
      * @return {@link String} contendo a mensagem em questão.
      */

@@ -48,8 +48,8 @@
     <string name="alerta">Verifique a conexão Wi-Fi ou Resete o sistema.</string>
 
     <string name="centUtilizarSist">Utilizar Sistema</string>
-    <string name="centPrinTexto">Esse sistema consiste em prover ao operador um auxílio para que a colhedora de café mantenha-se alinhada às plantas durante a colheita.</string>
-    <string name="centAjusPrinTexto">A seguir, o usuário será redirecionado para uma configuração de parâmetros, onde deve-se inserir a distância entre as barras (interior da colhedora), a menor e a maior distância medida pelos sensores.</string>
+    <string name="centPrinTexto">Esse sistema auxilia o operador a manter a colhedora de café alinhada às plantas durante a colheita.</string>
+    <string name="centAjusPrinTexto">A seguir, insira a distância entre as barras e os limites (menor/maior) medidos pelos sensores para configurar os parâmetros.</string>
 
     <string name="centRelatorioTitulo">Relatório</string>
     <string name="centRelDesalD">Desalinhamento - Direita: </string>

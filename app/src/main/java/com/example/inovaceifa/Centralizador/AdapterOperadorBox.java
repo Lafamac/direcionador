@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,12 +24,7 @@ import com.example.inovaceifa.Utilities.Imagem;
 import com.example.inovaceifa.Utilities.Text;
 import com.example.inovaceifa.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
 
 /**
  * Adaptador para ser utilizado em conjunto com o RecyclerView.
@@ -46,34 +41,30 @@ public class AdapterOperadorBox extends RecyclerView.Adapter<AdapterOperadorBox.
      * @author Gustavo Henrique Tostes
      * @version 1.0 - 20/12/2022
      */
-    class WordViewHolder extends RecyclerView.ViewHolder {
+    public static class WordViewHolder extends RecyclerView.ViewHolder {
         /**
          * {@link TextView} - Marca o número da Operador (<i>Ex: Operador 01 // Operador 02...</i>)
          */
-        TextView nome;
+        public TextView nome;
         /**
          * {@link TextView} - Marca o local da gleba, a ser inserido pelo usuário.
          */
-        TextView local;
-        /**
-         * {@link TextView} - Marca a data que deve ser realizada uma próxima medição.
-         */
-        TextView data;
+        public TextView local;
         /**
          * {@link Button} - Permite acesso do usuário aos detalhes da Operador (Activity: {@link CentralizadorTelaOperador}).
          */
-        Button detalhes;
+        public Button detalhes;
         /**
          * {@link ImageButton} - Permite deletar a gleba do sistema.
          */
-        ImageButton apagar;
+        public ImageButton apagar;
         /**
          * {@link ShapeableImageView} - Mostra a imagem associada à gleba (<i>Caso o usuário não tenha inserido alguma.
          * uma imagem default é apresentada</i>).
          */
-        ShapeableImageView foto;
+        public ShapeableImageView foto;
 
-        public WordViewHolder(View itemView) {
+        public WordViewHolder(@NonNull View itemView) {
             super(itemView);
             nome = itemView.findViewById(R.id.gerCad_num);
             local = itemView.findViewById(R.id.centSens_ajuste);
@@ -113,14 +104,7 @@ public class AdapterOperadorBox extends RecyclerView.Adapter<AdapterOperadorBox.
      */
     FragmentManager fm;
 
-    /**
-     * {@link Operador} - Objeto da gleba manipulada durante a operação.
-     */
-    Operador gleba;
-
     boolean deleteButtonVisible;
-
-    private final String TAG = "gerDebug";
 
     /**
      * Construtor para o adaptador.
@@ -141,26 +125,22 @@ public class AdapterOperadorBox extends RecyclerView.Adapter<AdapterOperadorBox.
         this.deleteButtonVisible = deleteButtonVisible;
     }
 
+    @NonNull
     @Override
-    public WordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.activity_adapter_operador_box, parent, false);
 
         return new WordViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(WordViewHolder holder, int position) {
-        gleba = listGlebas.get(position);
+    public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
+        Operador gleba = listGlebas.get(position);
 
         holder.apagar.setVisibility(deleteButtonVisible ? View.GONE : View.VISIBLE);
         
-        String texto_textView;
-
-        texto_textView = "Operador " + gleba.getNumero();
-        holder.nome.setText(Text.underline(texto_textView));
-
-        texto_textView = gleba.getLocal();
-        holder.local.setText(texto_textView);
+        holder.nome.setText(Text.underline("Operador " + gleba.getNumero()));
+        holder.local.setText(gleba.getLocal());
 
         Imagem image = new Imagem();
         if (gleba.getImagemPath() != null) {
@@ -171,7 +151,7 @@ public class AdapterOperadorBox extends RecyclerView.Adapter<AdapterOperadorBox.
             @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
-                String numeroOperador = (listGlebas.get(holder.getAbsoluteAdapterPosition())).getNumero();
+                String numeroOperador = (listGlebas.get(holder.getBindingAdapterPosition())).getNumero();
                 Intent intent = new Intent(context, CentralizadorTelaOperador.class);
                 intent.putExtra("numeroOperador", numeroOperador);
                 intent.putExtra("cadastro", deleteButtonVisible);
@@ -183,7 +163,7 @@ public class AdapterOperadorBox extends RecyclerView.Adapter<AdapterOperadorBox.
         holder.nome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String numeroOperador = (listGlebas.get(holder.getAbsoluteAdapterPosition())).getNumero();
+                String numeroOperador = (listGlebas.get(holder.getBindingAdapterPosition())).getNumero();
                 Intent intent = new Intent(context, CentralizadorTelaOperador.class);
                 intent.putExtra("numeroOperador", numeroOperador);
                 intent.putExtra("cadastro", deleteButtonVisible);
@@ -194,9 +174,9 @@ public class AdapterOperadorBox extends RecyclerView.Adapter<AdapterOperadorBox.
         holder.apagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gleba = listGlebas.get(holder.getAdapterPosition());
+                Operador glebaDeletar = listGlebas.get(holder.getBindingAdapterPosition());
 
-                showDialogDelete(gleba, holder.getAbsoluteAdapterPosition());
+                showDialogDelete(glebaDeletar, holder.getBindingAdapterPosition());
             }
         });
     }
@@ -289,48 +269,5 @@ public class AdapterOperadorBox extends RecyclerView.Adapter<AdapterOperadorBox.
         });
 
         dialog2.show();
-    }
-
-    /**
-     * Verifica a data da próxima medição caso já tenham sido feitas medições e o resultado nao foi
-     * colheita imediatada. Caso nenhuma medição tenha sido feita ou não seja colheita imediata, não
-     * há retorno.
-     * @param quando {@link String} contendo o atributo da classe {@link Operador} de quando colher.
-     * @return {@link String} contendo a data da proxima colheita.
-     */
-    private String verificaData(String quando) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String date = sdf.format(new Date());
-        Calendar calendar = Calendar.getInstance();
-
-        try {
-            calendar.setTime(Objects.requireNonNull(sdf.parse(date)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        calendar.add(Calendar.DATE, 21);
-
-        Log.d(TAG, sdf.format(calendar.getTime()));
-
-        if (quando == null) {
-            return "";
-        } else if (quando.equals("0")) {
-            return "";
-        } else {
-            switch (quando) {
-                case "7":
-                    calendar.add(Calendar.DATE, 7);
-                    break;
-                case "14":
-                    calendar.add(Calendar.DATE, 14);
-                    break;
-                case "21":
-                    calendar.add(Calendar.DATE, 21);
-                    break;
-            }
-
-            return sdf.format(calendar.getTime());
-        }
     }
 }

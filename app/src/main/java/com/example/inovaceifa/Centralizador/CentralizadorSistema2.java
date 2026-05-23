@@ -388,6 +388,7 @@ public class CentralizadorSistema2 extends AppCompatActivity implements Runnable
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
     }
 
     /**

@@ -109,7 +109,7 @@ public class CentralizadorPrincipal extends AppCompatActivity implements DialogI
 
     @Override
     public void onConfirmClickedInsertDialog(String textDialog1, String textDialog2, String textDialog3) {
-        final String senha_acesso = "35961729";
+        final String senha_acesso = "159357";
 
         // Comparação segura de String para evitar NullPointerException
         if (senha_acesso.equals(textDialog1)) {

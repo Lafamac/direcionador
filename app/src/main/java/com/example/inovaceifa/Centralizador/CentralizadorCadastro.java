@@ -101,6 +101,9 @@ public class CentralizadorCadastro extends AppCompatActivity implements DialogIn
 
     private boolean deletaBotao;
 
+    private View layoutOpcoesAdmin;
+    private Button btnConfiguracoes, btnRelatorios;
+
     //----------------------------------------------------------------------------------------------
 
     @Override
@@ -139,6 +142,9 @@ public class CentralizadorCadastro extends AppCompatActivity implements DialogIn
         botaoApagar = findViewById(R.id.gerCad_apagar);
         textoCadastro = findViewById(R.id.txt_gerCad1);
         textoOperador = findViewById(R.id.txt_operador);
+        layoutOpcoesAdmin = findViewById(R.id.admin_options_layout);
+        btnConfiguracoes = findViewById(R.id.btn_configuracoes);
+        btnRelatorios = findViewById(R.id.btn_relatorios);
 
         formaDeAcesso = (String) getIntent().getSerializableExtra("formaAcesso");
 
@@ -181,19 +187,34 @@ public class CentralizadorCadastro extends AppCompatActivity implements DialogIn
     private void configCadastro() {
         if(formaDeAcesso.equals("admin"))
         {
-            cadastro.setVisibility(View.VISIBLE);
             textoCadastro.setVisibility(View.VISIBLE);
             textoOperador.setVisibility(View.GONE);
+            
+            btnConfiguracoes.setVisibility(View.VISIBLE);
+            btnRelatorios.setVisibility(View.VISIBLE);
+            cadastro.setVisibility(View.VISIBLE);
+
             cadastro.setOnClickListener(v -> {
                 DialogInsert di = new DialogInsert();
                 di.show(getSupportFragmentManager(), "Add operador");
             });
+
+            btnConfiguracoes.setOnClickListener(v -> {
+                startActivity(new Intent(this, CentralizadorAjustesPrincipal.class));
+            });
+
+            btnRelatorios.setOnClickListener(v -> {
+                startActivity(new Intent(this, CentralizadorRelatorio.class));
+            });
         }
         else
         {
-            cadastro.setVisibility(View.GONE);
             textoCadastro.setVisibility(View.GONE);
             textoOperador.setVisibility(View.VISIBLE);
+            
+            btnConfiguracoes.setVisibility(View.GONE);
+            btnRelatorios.setVisibility(View.GONE);
+            cadastro.setVisibility(View.GONE);
         }
     }
 

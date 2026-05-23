@@ -116,13 +116,13 @@ public class CentralizadorLEDs {
                 if(valor_recebido == 0) {
                     apagaLEDs();
                     apagaSetas();
-                    imagens[12].setVisibility((View.VISIBLE));
+                    imagens[6].setVisibility((View.VISIBLE));
                 } else if(valor_recebido > 0) {
                     acende_direita(valor_recebido);
-                    acendeSetaEsquerda(valor_recebido);
+                    acendeSetaDireita(valor_recebido);
                 } else {
                     acende_esquerda(valor_recebido);
-                    acendeSetaDireita(valor_recebido);
+                    acendeSetaEsquerda(valor_recebido);
                 }
                 valorArquivo = (""+valor_recebido+"\n");
             }
@@ -182,12 +182,16 @@ public class CentralizadorLEDs {
     }
 
     /**
-     * "Apaga" todos os LEDs, configurando a visibilidade de todos para INVISIBLE
+     * "Apaga" todos os LEDs, configurando a visibilidade de todos para INVISIBLE,
+     * exceto o LED central (Marco Zero) que deve permanecer VISIBLE.
      */
     public void apagaLEDs() {
-        limite= ((imagens.length)-1); //Recebe o tamanho do vetor de imagens (LEDs)
-        for(int i = 0; i < limite; i++) {
-            imagens[i].setVisibility(View.INVISIBLE); //Faz com que todos os LEDs apaguem
+        for(int i = 0; i < imagens.length; i++) {
+            if (i == 6) {
+                imagens[i].setVisibility(View.VISIBLE);
+            } else {
+                imagens[i].setVisibility(View.INVISIBLE);
+            }
         }
     }
 
@@ -203,18 +207,16 @@ public class CentralizadorLEDs {
      * @param valor_recebido Valor advindo da comunicação via UDP - Valores positivos
      */
     private void acende_direita(int valor_recebido) {
-        apagaLEDs(); //Apaga todos os LEDs para nao haver conflito
+        apagaLEDs(); //Apaga todos os LEDs para nao haver conflito, mantendo o central aceso
 
-        //valor_recebido = adequaValor(valor_recebido);
-        //System.out.println("Valor adequado: " + valor_recebido);
-
-        limite= valor_recebido+6;
-        for(int i = 6; i < limite; i++) {
-            imagens[i].setVisibility(View.VISIBLE); //Seta todos os LEDs como visiveis (dentro do limite).
+        int limiteLocal = valor_recebido + 6;
+        for(int i = 6; i <= limiteLocal; i++) {
+            if (i < imagens.length) {
+                imagens[i].setVisibility(View.VISIBLE); //Seta os LEDs como visiveis
+            }
         }
-        //Apaga todos os LEDs do lado esquerdo
-        int nlimite= 0;
-        for(int i = 5; i >= nlimite; i--) {
+        //Apaga os LEDs do lado esquerdo (0 a 5)
+        for(int i = 0; i < 6; i++) {
             imagens[i].setVisibility(View.INVISIBLE);
         }
     }
@@ -224,18 +226,16 @@ public class CentralizadorLEDs {
      * @param valor_recebido Valor advindo da comunicação via UDP - Valores negativos
      */
     private void acende_esquerda(int valor_recebido) {
-        apagaLEDs(); //Apaga todos os LEDs para nao haver conflito
+        apagaLEDs(); //Apaga todos os LEDs para nao haver conflito, mantendo o central aceso
 
-        //valor_recebido = adequaValor(valor_recebido);
-        //System.out.println("Valor adequado: " + valor_recebido);
-
-        limite= valor_recebido+6;
-        for(int i = 5; i >= limite; i--) {
-            imagens[i].setVisibility(View.VISIBLE);
+        int limiteLocal = valor_recebido + 6; // Ex: -6 + 6 = 0
+        for(int i = 6; i >= limiteLocal; i--) {
+            if (i >= 0) {
+                imagens[i].setVisibility(View.VISIBLE);
+            }
         }
-        //Apaga todos os LEDs do lado direito
-        int nlimite= ((imagens.length)-1); //Recebe o tamanho do vetor de imagens (LEDs)
-        for(int i = 6; i < nlimite; i++) {
+        //Apaga os LEDs do lado direito (7 a 12)
+        for(int i = 7; i < imagens.length; i++) {
             imagens[i].setVisibility(View.INVISIBLE);
         }
     }
@@ -244,8 +244,8 @@ public class CentralizadorLEDs {
      * Apaga todas as setas de direção
      */
     public void apagaSetas() {
-        setaE.setVisibility(View.GONE);
-        setaD.setVisibility(View.GONE);
+        setaE.setVisibility(View.INVISIBLE);
+        setaD.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -255,12 +255,16 @@ public class CentralizadorLEDs {
     private void acendeSetaDireita(int valor) {
         apagaSetas();
         setaD.setVisibility(View.VISIBLE);
-        if (valor >= -2) {
-            setaD.setImageResource(R.drawable.vd);
-        } else if (valor >= -4) {
-            setaD.setImageResource(R.drawable.am);
+        
+        // valor é negativo aqui (máquina na esquerda, blocos na esquerda)
+        // A seta DIREITA (setaD) aparece para mandar corrigir para a direita.
+        int absValor = Math.abs(valor);
+        if (absValor <= 2) {
+            setaD.setImageResource(R.drawable.vd); // Verde
+        } else if (absValor <= 4) {
+            setaD.setImageResource(R.drawable.am); // Amarelo
         } else {
-            setaD.setImageResource(R.drawable.vm);
+            setaD.setImageResource(R.drawable.vm); // Vermelho
         }
     }
 
@@ -271,12 +275,16 @@ public class CentralizadorLEDs {
     private void acendeSetaEsquerda(int valor) {
         apagaSetas();
         setaE.setVisibility(View.VISIBLE);
-        if (valor <= 2) {
-            setaE.setImageResource(R.drawable.vd);
-        } else if (valor <= 4) {
-            setaE.setImageResource(R.drawable.am);
+        
+        // valor é positivo aqui (máquina na direita, blocos na direita)
+        // A seta ESQUERDA (setaE) aparece para mandar corrigir para a esquerda.
+        int absValor = Math.abs(valor); 
+        if (absValor <= 2) {
+            setaE.setImageResource(R.drawable.vd); // Verde
+        } else if (absValor <= 4) {
+            setaE.setImageResource(R.drawable.am); // Amarelo
         } else {
-            setaE.setImageResource(R.drawable.vm);
+            setaE.setImageResource(R.drawable.vm); // Vermelho
         }
     }
 
