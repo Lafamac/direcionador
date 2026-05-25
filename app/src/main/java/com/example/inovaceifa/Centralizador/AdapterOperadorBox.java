@@ -154,11 +154,20 @@ public class AdapterOperadorBox extends RecyclerView.Adapter<AdapterOperadorBox.
             @Override
             public void onClick(View v) {
                 String numeroOperador = (listGlebas.get(holder.getBindingAdapterPosition())).getNumero();
-                Intent intent = new Intent(context, CentralizadorTelaOperador.class);
-                intent.putExtra("numeroOperador", numeroOperador);
-                intent.putExtra("cadastro", deleteButtonVisible);
-                intent.putExtra("activity", context.getClass().getSimpleName());
-                ((Activity) context).startActivity(intent);
+                
+                if (!deleteButtonVisible) {
+                    // MODO ADMIN: Vai para a tela de edição de dados (Original)
+                    Intent intent = new Intent(context, CentralizadorTelaOperador.class);
+                    intent.putExtra("numeroOperador", numeroOperador);
+                    intent.putExtra("cadastro", deleteButtonVisible);
+                    intent.putExtra("activity", context.getClass().getSimpleName());
+                    ((Activity) context).startActivity(intent);
+                } else {
+                    // MODO UTILIZAR SISTEMA: Vai para a tela de operação (CentralizadorSistema)
+                    Intent intent = new Intent(context, CentralizadorSistema.class);
+                    intent.putExtra("numeroOperador", numeroOperador);
+                    ((Activity) context).startActivity(intent);
+                }
             }
         });
 

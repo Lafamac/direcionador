@@ -33,7 +33,7 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
 
     //Informações inerentes ao banco de dados, tais quais seu nome e sua versão.
     private static final String DATABASE_NAME = "CEIFA_Database3.0";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     //Tabelas presentes no banco de dados.
     private static final String TABLE_OPERADOR = "gerenciador";
@@ -203,6 +203,14 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
                 db.execSQL("ALTER TABLE " + TABLE_CENTRALIZADOR + " ADD COLUMN " + KEY_CENT_TEMPO_FIXO + " REAL DEFAULT 1.3");
             } catch (Exception e) {
                 Log.e(TAG, "Erro ao atualizar banco de dados para versão 2: " + e.getMessage());
+            }
+        }
+        if(oldVersion < 3) {
+            try {
+                db.execSQL(createTableEventos());
+                db.execSQL(createTableTempo());
+            } catch (Exception e) {
+                Log.e(TAG, "Erro ao atualizar banco de dados para versão 3: " + e.getMessage());
             }
         }
     }
