@@ -329,6 +329,16 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
 
     private void executarUDP() {
         sensorManager.setModoSimulado(random.isChecked());
+        
+        // Se estiver em manobra, apenas mantém a interface limpa
+        if (manobra.isChecked()) {
+            runOnUiThread(() -> {
+                l.apagaLEDs();
+                l.apagaSetas();
+            });
+            return;
+        }
+
         recebido = sensorManager.getDesalinhamento(comando, this);
 
         if (recebido != null && !recebido.isEmpty()) {
@@ -342,14 +352,14 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
                         com.example.inovaceifa.Utilities.Arquivo.writeFile(l.getValorArquivo(), this, "log_deslocamento.txt");
                     }
 
-                    // Log opcional para debug
-                    Log.d(TAG, "Interface atualizada com: " + recebido);
+                    Log.d(TAG, "Interface atualizada: " + recebido);
                 } catch (Exception e) {
                     Log.e(TAG, "Erro ao atualizar interface: " + e.getMessage());
                 }
             });
         } else {
-            Log.w(TAG, "Nenhuma resposta recebida do ESP32 (Timeout)");
+            // Em caso de falha de comunicação (Timeout)
+            Log.w(TAG, "Falha de comunicação com ESP32");
         }
     }
 

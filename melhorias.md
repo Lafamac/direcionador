@@ -6,6 +6,7 @@ Este documento registra todas as evoluções feitas no projeto para solucionar o
 - **Timeout UDP:** Implementado timeout de 1000ms no `UDPProtocol.java` para evitar o congelamento do app caso o ESP32 falhe.
 - **Buffer de Rede Seguro:** Aumentado o buffer de recebimento para 1024 bytes, garantindo a integridade de mensagens longas.
 - **Fluxo Síncrono:** Criado o método `enviarEReceber()` que aguarda a resposta do hardware antes de liberar a próxima ação, garantindo sincronização.
+- **Tratamento de Exceções:** Adicionado tratamento robusto de `IOException` e timeouts específicos para evitar crashes durante a comunicação de rede.
 
 ## 2. Arquitetura e Organização (PROBLEMAS 2, 6 e 8)
 - **SensorManager:** Criada uma nova camada de gerenciamento de estado. Agora a interface não fala diretamente com a rede; ela solicita os dados ao `SensorManager`.

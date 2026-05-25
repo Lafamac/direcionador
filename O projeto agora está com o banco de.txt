@@ -1,0 +1,1 @@
+O projeto agora está com o banco de dados robusto e a interface da tela operacional muito mais equilibrada! O que vamos fazer agora? Seguimos para a ETAPA 3 (Comunicação UDP)?

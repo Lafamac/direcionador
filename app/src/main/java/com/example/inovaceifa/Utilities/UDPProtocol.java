@@ -51,12 +51,17 @@ public class UDPProtocol {
             DatagramPacket sdp = new DatagramPacket(data, data.length, serverAddr, UDP_SERVER_PORT);
             sds.send(sdp);
 
+            // Tenta receber uma confirmação opcional
             byte[] buf = new byte[1024];
             DatagramPacket rdp = new DatagramPacket(buf, buf.length);
-            sds.receive(rdp);
-            
-            mensagem_recebida = new String(rdp.getData(), rdp.getOffset(), rdp.getLength(), StandardCharsets.UTF_8);
-            Log.d(TAG, "recebido: " + mensagem_recebida);
+            try {
+                sds.receive(rdp);
+                mensagem_recebida = new String(rdp.getData(), rdp.getOffset(), rdp.getLength(), StandardCharsets.UTF_8);
+                Log.d(TAG, "Confirmação UDP recebida: " + mensagem_recebida);
+            } catch (IOException e) {
+                // Timeout no receive do sendUDP é comum se o hardware apenas processa e não responde
+                mensagem_recebida = null;
+            }
         } catch (IOException e) {
             Log.e(TAG, "Erro UDP (sendUDP): " + e.getMessage());
             mensagem_recebida = null;

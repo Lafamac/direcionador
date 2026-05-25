@@ -271,7 +271,7 @@ Sistema;
 Relatórios;
 Ajustes.
 Padronização de layout na tela operacional.
-ETAPA 3 — Corrigir comunicação UDP
+ETAPA 3 — Corrigir comunicação UDP — **CONCLUÍDO**
 Objetivo
 
 Garantir:

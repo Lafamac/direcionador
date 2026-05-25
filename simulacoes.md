@@ -47,11 +47,12 @@ Este arquivo descreve o passo a passo para validar cada funcionalidade do sistem
    - Verifique no console (Logcat) do Android Studio se a mensagem `enviar Mensagem params:...` foi disparada com sucesso.
 
 ### Teste 2.2: Resistência a Falhas (Timeout)
-1. Com o app em execução na tela operacional, **desligue a alimentação do ESP32**.
+1. Com o app em execução na tela operacional, **desligue a alimentação do ESP32** ou desconecte o Wi-Fi.
 2. Clique em **Iniciar**.
 3. **O que observar:**
    - O aplicativo **não pode travar**.
-   - O sistema deve tentar a conexão por 1 segundo e retornar ao estado de espera, permitindo que você clique em outros botões.
+   - O sistema deve tentar a conexão, respeitar o timeout de 1 segundo e continuar operando (Logcat deve mostrar "Falha de comunicação").
+   - Você deve conseguir clicar em **Pausar** ou **Voltar** sem atrasos significativos.
 
 ### Teste 2.3: Controle de Tempo Operacional
 1. Vá em **Ajustes** e desmarque a opção **"Liberar Scroll para Operador"**.
