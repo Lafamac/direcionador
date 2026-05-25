@@ -9,9 +9,10 @@ Este arquivo descreve o passo a passo para validar cada funcionalidade do sistem
 1. Abra o aplicativo.
 2. Navegue até **Utilizar Sistema**.
 3. Selecione qualquer **Operador**.
-4. Ative a chave **Simular** na parte inferior.
-5. Clique no botão **Iniciar**.
-6. **O que observar:**
+4. Verifique a barra de controles inferior: os botões **Simular**, **Iniciar/Pausar**, **Manobra** e **Marcar Pé** devem estar perfeitamente alinhados e com o mesmo tamanho.
+5. Ative a chave **Simular** na parte inferior.
+6. Clique no botão **Iniciar**.
+7. **O que observar:**
    - Os blocos de LED centrais devem acender e mudar de posição suavemente.
    - Quando os LEDs se deslocarem para a **DIREITA**, a seta da **ESQUERDA** deve acender (indicando correção).
    - A cor da seta deve mudar conforme a intensidade do desalinhamento: **Verde** (leve), **Amarela** (médio), **Vermelha** (crítico).

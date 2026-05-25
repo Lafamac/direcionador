@@ -17,12 +17,14 @@ Este documento registra todas as evoluções feitas no projeto para solucionar o
 - **Novos Campos de Controle:** Adicionados campos `habilitaScrollTempo` e `tempoFixo` na tabela `centralizador`.
 - **Tabela de Eventos de Produção:** Criada a tabela `eventos_producao` para registrar cada "Pé Marcado" de forma permanente, incluindo ID do Operador, Data e Hora.
 - **Correção de Persistência:** Corrigido bug onde registros de tempo eram salvos em tabelas incorretas.
+- **Robustez de Métodos:** Implementados métodos `putAllTempo` e `searchNumber` no `HelperDatabaseSQL` para garantir o funcionamento correto de inserções e buscas de registros de tempo e operadores.
 
 ## 4. Interface e Experiência do Usuário (PROBLEMAS 4 e FASE 1)
 - **Suporte Total a Landscape:** A tela de Ajustes agora funciona perfeitamente na horizontal, com organização em colunas e sistema de rolagem.
 - **Simplificação e Performance:** Removida a necessidade de imagens na lista de operadores, tornando o carregamento mais rápido e a interface mais limpa.
 - **Acessibilidade:** Aumentado o tamanho das fontes (18sp) e a área de toque dos botões na área do administrador.
 - **Lógica de Orientação:** Corrigida a inversão das setas de correção. Agora o sistema indica corretamente para qual lado o operador deve girar o volante para centralizar a colheitadeira.
+- **Padronização de Controles:** Botões operacionais (**Simular**, **Iniciar/Pausar**, **Manobra** e **Marcar Pé**) agora possuem tamanhos e pesos visuais idênticos, garantindo uma interface equilibrada e profissional.
 
 ## 5. Novas Funcionalidades
 - **Modo Simulação Realista:** Implementado um gerador de valores suavizado que simula o movimento real da máquina para testes de bancada.

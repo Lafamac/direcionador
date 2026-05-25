@@ -242,7 +242,7 @@ CentralizadorLEDs
 ↓
 Operador visualiza direção
 Plano de Correção por Etapas
-ETAPA 1 — Fazer o projeto compilar
+ETAPA 1 — Fazer o projeto compilar — **CONCLUÍDO**
 Objetivo
 
 Garantir:
@@ -255,9 +255,10 @@ SDK 34;
 Dependências;
 Manifest;
 Permissões.
+Correção de métodos SQL faltantes (`putAllTempo`, `searchNumber`).
 Resultado esperado
 App compilando corretamente
-ETAPA 2 — Validar abertura das telas
+ETAPA 2 — Validar abertura das telas — **CONCLUÍDO**
 Objetivo
 
 Garantir:
@@ -269,6 +270,7 @@ Principal;
 Sistema;
 Relatórios;
 Ajustes.
+Padronização de layout na tela operacional.
 ETAPA 3 — Corrigir comunicação UDP
 Objetivo
 
