@@ -1,259 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_9"
-    tools:context=".Centralizador.CentralizadorRelatorio">
+    android:background="@color/color_9">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/centRel_voltar"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:elevation="0dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/seta_voltar_preta"
         app:backgroundTint="@color/ap_transparent"
         app:borderWidth="0dp"
         app:elevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:maxImageSize="36dp"
-        app:pressedTranslationZ="0dp"
-        app:rippleColor="@color/ap_transparent" />
+        app:maxImageSize="30dp" />
 
     <TextView
+        android:id="@+id/txt_titulo_relatorio"
         style="@style/textoBoldBlack"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:autoSizeMaxTextSize="22sp"
-        android:autoSizeTextType="uniform"
-        android:gravity="center"
-        android:text="@string/centRelatorioTitulo"
-        app:layout_constraintBottom_toTopOf="@+id/centRel_guide1"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Histórico"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/centRel_voltar"
         app:layout_constraintStart_toEndOf="@+id/centRel_voltar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/centRel_voltar" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/centRel_guide1"
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/spinner_filtro_data"
+        style="@style/PowerSpinnerStyle"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:hint="Data"
+        android:padding="5dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/centRel_voltar"
+        app:layout_constraintStart_toEndOf="@+id/txt_titulo_relatorio"
+        app:layout_constraintTop_toTopOf="@+id/centRel_voltar"
+        app:spinner_arrow_gravity="end"
+        app:spinner_popup_background="@drawable/fundo_branco_borda" />
+
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/spinner_filtro_operador"
+        style="@style/PowerSpinnerStyle"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:hint="Operador"
+        android:padding="5dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/centRel_voltar"
+        app:layout_constraintStart_toEndOf="@+id/spinner_filtro_data"
+        app:layout_constraintTop_toTopOf="@+id/centRel_voltar"
+        app:spinner_arrow_gravity="end"
+        app:spinner_popup_background="@drawable/fundo_branco_borda" />
+
+    <Button
+        android:id="@+id/btn_limpar_filtros"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        style="@style/CamposDeTexto"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/centRel_guide2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/centRel_guide1" >
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/centRel_guide3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.333" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/centRel_guide4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.666" />
-
-        <LinearLayout
-            android:id="@+id/centRel_datas"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/fundo_branco_borda"
-            app:layout_constraintBottom_toTopOf="@+id/guideline20"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginStart="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.skydoves.powerspinner.PowerSpinnerView
-                android:id="@+id/centRel_spinnerDatas"
-                style="@style/PowerSpinnerStyle"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="6dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint="@string/selecionarOpcao"
-
-                app:spinner_arrow_tint="@color/black"
-                app:spinner_arrow_show="false"
-                app:spinner_arrow_animate="true"
-                app:spinner_arrow_gravity="end"
-                app:spinner_arrow_padding="8dp"
-
-                app:spinner_divider_color="@color/black"
-                app:spinner_divider_show="false"
-                app:spinner_divider_size="0.4dp"
-                app:spinner_item_height="40dp"
-                app:spinner_popup_background="@drawable/fundo_branco"
-                app:spinner_popup_elevation="15dp"
-                app:spinner_popup_max_height="350dp" />
-        </LinearLayout>
-
-
-        <ImageView
-            android:id="@+id/centRel_desE"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            app:layout_constraintHeight_percent="0.2"
-            android:rotation="180"
-            android:scaleType="fitCenter"
-            android:src="@drawable/setarel"
-            app:layout_constraintBottom_toTopOf="@id/centRel_layout1"
-            app:layout_constraintEnd_toStartOf="@+id/centRel_guide3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline20" />
-
-        <LinearLayout
-            android:id="@+id/centRel_layout1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/centRel_guide3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/centRel_desE">
-
-            <TextView
-                android:id="@+id/centRel_porcentagemE"
-                style="@style/textoBoldBlack"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:autoSizeMaxTextSize="20sp"
-                android:autoSizeTextType="uniform"
-                android:gravity="center"
-                android:text="Desalinhamento Esquerda: " />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/centRel_cent"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:rotation="-90"
-            android:scaleType="fitCenter"
-            android:src="@drawable/setarel3"
-            android:layout_margin="10dp"
-            app:layout_constraintHeight_percent="0.2"
-            app:layout_constraintBottom_toTopOf="@id/centRel_layout2"
-            app:layout_constraintEnd_toStartOf="@+id/centRel_guide4"
-            app:layout_constraintStart_toStartOf="@+id/centRel_guide3"
-            app:layout_constraintTop_toTopOf="@+id/guideline20" />
-
-        <LinearLayout
-            android:id="@+id/centRel_layout2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/centRel_guide4"
-            app:layout_constraintStart_toStartOf="@+id/centRel_guide3"
-            app:layout_constraintTop_toBottomOf="@+id/centRel_cent">
-
-            <TextView
-                android:id="@+id/centRel_porcentagemC"
-                style="@style/textoBoldBlack"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:autoSizeMaxTextSize="20sp"
-                android:autoSizeTextType="uniform"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="Centralizamento: " />
-
-        </LinearLayout>
-
-
-        <ImageView
-            android:id="@+id/centRel_desD"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:rotation="180"
-            android:scaleType="fitCenter"
-            android:layout_margin="10dp"
-            app:layout_constraintHeight_percent="0.2"
-            android:src="@drawable/setarel2"
-            app:layout_constraintBottom_toTopOf="@id/centRel_layout3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/centRel_guide4"
-            app:layout_constraintTop_toTopOf="@+id/guideline20" />
-
-        <LinearLayout
-            android:id="@+id/centRel_layout3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/centRel_guide4"
-            app:layout_constraintTop_toBottomOf="@+id/centRel_desD">
-
-            <TextView
-                android:id="@+id/centRel_porcentagemD"
-                style="@style/textoBoldBlack"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:autoSizeMaxTextSize="20sp"
-                android:autoSizeTextType="uniform"
-                android:gravity="center"
-                android:text="Desalinhamento - Direita: " />
-        </LinearLayout>
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/centRel_guide2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.83" />
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/transparent"
+        android:text="Limpar"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/centRel_voltar"
+        app:layout_constraintStart_toEndOf="@+id/spinner_filtro_operador"
+        app:layout_constraintTop_toTopOf="@+id/centRel_voltar" />
 
     <Button
         android:id="@+id/centRel_finalizar"
         style="@style/botaoPreto"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/botaoFinalizar"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/centRel_voltar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/centRel_voltar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_eventos_producao"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:autoSizeMaxTextSize="18sp"
-        android:autoSizeTextType="uniform"
-        android:text="@string/botaoFinalizar"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/centRel_voltar" />
+
+    <TextView
+        android:id="@+id/txt_sem_dados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nenhum dado."
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/centRel_guide2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

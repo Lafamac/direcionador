@@ -78,49 +78,29 @@ public class UDPProtocol extends AppCompatActivity {
      * @param gateway {@link String} contendo o endereço de IP do ESP.
      */
     private void sendUDP(String mensagem, int UDP_SERVER_PORT, String gateway) {
-        //Criação do socket de comunicação inciou como nulo para zerar
         DatagramSocket sds = null;
-        String recebido = "";
-
-        //buf de mensagem tem criar toda hora para não guardar lixo
-
         try {
-            //Criação do socket de comunicação
             sds = new DatagramSocket();
+            sds.setSoTimeout(1000); // Adicionado timeout de 1 segundo
             InetAddress serverAddr = InetAddress.getByName(gateway);
-            DatagramPacket sdp;
-            // Mensagem, tamanho da mensagem, IP e porta
-            sdp = new DatagramPacket(mensagem.getBytes(), mensagem.length(),
+            DatagramPacket sdp = new DatagramPacket(mensagem.getBytes(), mensagem.length(),
                     serverAddr, UDP_SERVER_PORT);
-            //Mensagem que será enviada
             sds.send(sdp);
 
-            //Quantidade de bytes que estarei truncando a informação 10 consigo pegar até 1000
-            byte[] buf = new byte[10];
-            DatagramPacket  rdp;
-            //Criação da comunicação de recebimentos
-            rdp = new DatagramPacket(buf, buf.length);
-            //recebimento de dados
+            byte[] buf = new byte[1024]; // Aumentado para 1024 para segurança
+            DatagramPacket rdp = new DatagramPacket(buf, buf.length);
             sds.receive(rdp);
-            //transformando dado recebido em string
-            mensagem_recebida = new String(rdp.getData(), rdp.getOffset(), rdp.getLength());
+            
+            mensagem_recebida = new String(rdp.getData(), rdp.getOffset(), rdp.getLength(), StandardCharsets.UTF_8);
             Log.d(TAG, "recebido: " + mensagem_recebida);
-            //setando texto no visual
-            //recebido.setText(mensagem_recebida);
 
-        }
-        //Exceções necessárias
-        catch (SocketException e) {
-            e.printStackTrace();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Erro UDP (sendUDP): " + e.getMessage());
+            mensagem_recebida = null;
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //Finaliza socket comunicação
-        finally {
+            Log.e(TAG, "Erro inesperado UDP: " + e.getMessage());
+            mensagem_recebida = null;
+        } finally {
             if (sds != null) {
                 sds.close();
             }

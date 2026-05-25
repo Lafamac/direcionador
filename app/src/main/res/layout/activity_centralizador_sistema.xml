@@ -360,9 +360,23 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toEndOf="@+id/centSist_start"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/centSist_marcarPe"
+            style="@style/textoBotoes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="Marcar Pé"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.45"
+            app:layout_constraintStart_toEndOf="@+id/manobra"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

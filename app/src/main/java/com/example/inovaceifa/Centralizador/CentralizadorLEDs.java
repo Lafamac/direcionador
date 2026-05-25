@@ -119,10 +119,10 @@ public class CentralizadorLEDs {
                     imagens[6].setVisibility((View.VISIBLE));
                 } else if(valor_recebido > 0) {
                     acende_direita(valor_recebido);
-                    acendeSetaDireita(valor_recebido);
+                    acendeSetaEsquerda(valor_recebido); // Invertido: se está na direita, manda ir para a esquerda
                 } else {
                     acende_esquerda(valor_recebido);
-                    acendeSetaEsquerda(valor_recebido);
+                    acendeSetaDireita(valor_recebido); // Invertido: se está na esquerda, manda ir para a direita
                 }
                 valorArquivo = (""+valor_recebido+"\n");
             }

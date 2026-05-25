@@ -137,15 +137,17 @@ public class AdapterOperadorBox extends RecyclerView.Adapter<AdapterOperadorBox.
     public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
         Operador gleba = listGlebas.get(position);
 
+        // Se for admin (deleteButtonVisible é false), mostra o botão apagar
+        // Se for operador (deleteButtonVisible é true), esconde o botão apagar
         holder.apagar.setVisibility(deleteButtonVisible ? View.GONE : View.VISIBLE);
         
-        holder.nome.setText(Text.underline("Operador " + gleba.getNumero()));
+        // Exibe o nome do operador (local) em destaque
         holder.local.setText(gleba.getLocal());
+        
+        // Número do operador fica escondido
+        holder.nome.setVisibility(View.GONE);
 
-        Imagem image = new Imagem();
-        if (gleba.getImagemPath() != null) {
-            holder.foto.setImageBitmap(image.pathToImage(gleba.getImagemPath()));
-        }
+        holder.detalhes.setText("Selecionar");
 
         holder.detalhes.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")

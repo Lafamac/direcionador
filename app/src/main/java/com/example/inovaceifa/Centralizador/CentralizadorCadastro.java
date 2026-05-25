@@ -330,7 +330,7 @@ public class CentralizadorCadastro extends AppCompatActivity implements DialogIn
 
     @Override
     public void setHintsInsertDialog(EditText editText1, EditText editText2, EditText editText3) {
-        editText1.setHint("Digite o nome do operador");
+        editText1.setHint("Digite o nome do novo operador");
     }
 
     @Override

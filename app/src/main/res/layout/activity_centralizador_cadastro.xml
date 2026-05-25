@@ -124,33 +124,33 @@
                 android:id="@+id/btn_configuracoes"
                 style="@style/textoBotoes"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:layout_margin="4dp"
                 android:text="Ajustes"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_relatorios"
                 style="@style/textoBotoes"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:layout_margin="4dp"
                 android:text="Relatórios"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 android:visibility="gone" />
 
             <Button
                 android:id="@+id/cadastrarOperador"
                 style="@style/textoBotoes"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:layout_margin="4dp"
-                android:text="@string/gerBotaoAddGleba"
-                android:textSize="12sp"
+                android:text="Novo Operador"
+                android:textSize="18sp"
                 app:backgroundTint="@null" />
 
         </LinearLayout>

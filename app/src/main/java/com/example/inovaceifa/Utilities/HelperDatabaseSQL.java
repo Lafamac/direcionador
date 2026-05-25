@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.example.inovaceifa.Centralizador.CentralizadorParametros;
+import com.example.inovaceifa.Centralizador.EventoProducao;
 import com.example.inovaceifa.Centralizador.Operador;
 import com.example.inovaceifa.Centralizador.Tempo;
 
@@ -38,6 +39,7 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
     private static final String TABLE_OPERADOR = "gerenciador";
     private static final String TABLE_CENTRALIZADOR = "centralizador";
     private static final String TABLE_TEMPO = "tempo";
+    private static final String TABLE_EVENTOS = "eventos_producao";
 
     //Colunas referentes às operadors cadastradas, contendo os tópicos necessários para caracterizácao
     private static final String KEY_OPERADOR_ID = "_id";
@@ -105,7 +107,15 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
     private static final String KEY_CENT_PATH_7 = "filePath7";
 
 
-    //Trabela TempoDeTrabalho
+    //Tabela Eventos de Produção
+    private static final String KEY_EVENTO_ID = "eventoID";
+    private static final String KEY_EVENTO_TIPO = "tipoEvento"; // Ex: "MARCAR_PE", "START", "STOP"
+    private static final String KEY_EVENTO_HORA = "hora";
+    private static final String KEY_EVENTO_DATA = "data";
+    private static final String KEY_EVENTO_VALOR = "valor";
+    private static final String KEY_EVENTO_OPERADOR_ID = "operadorID";
+
+    //Tabela Tempo de Trabalho (Restaurado)
     private static final String KEY_TEMPO_ID = "tempoID";
     private static final String KEY_TEMPO_INICIO = "tempoInicio";
     private static final String KEY_TEMPO_FINAL = "tempoFinal";
@@ -171,6 +181,9 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
 
         //Criação da última versão da tabela DE Tempo do gerenciador.
         db.execSQL(createTableTempo());
+
+        //Criação da tabela de eventos
+        db.execSQL(createTableEventos());
     }
 
     /**
@@ -951,16 +964,103 @@ public class HelperDatabaseSQL extends SQLiteOpenHelper {
     }
 
 
-    //------------------------------------------------------------------------------------*//
+    private String createTableEventos() {
+        return "CREATE TABLE " + TABLE_EVENTOS + "(" +
+                KEY_EVENTO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                KEY_EVENTO_TIPO + " TEXT," +
+                KEY_EVENTO_HORA + " TEXT," +
+                KEY_EVENTO_DATA + " TEXT," +
+                KEY_EVENTO_VALOR + " TEXT," +
+                KEY_EVENTO_OPERADOR_ID + " TEXT" +
+                ")";
+    }
+    
     public void addTempo(Tempo tempo) {
         if (mWritableDB == null) {
             mWritableDB = getWritableDatabase();
         }
 
-        //long operadorId = -1;
         ContentValues values = putAllTempo(tempo);
 
-        mWritableDB.insert(TABLE_OPERADOR, null, values);
+        mWritableDB.insert(TABLE_TEMPO, null, values);
+    }
+
+    public void registrarEvento(String tipo, String valor, String operadorID) {
+        if (mWritableDB == null) mWritableDB = getWritableDatabase();
+        
+        java.text.SimpleDateFormat sdfData = new java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault());
+        java.text.SimpleDateFormat sdfHora = new java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.getDefault());
+        String data = sdfData.format(new java.util.Date());
+        String hora = sdfHora.format(new java.util.Date());
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_EVENTO_TIPO, tipo);
+        values.put(KEY_EVENTO_VALOR, valor);
+        values.put(KEY_EVENTO_OPERADOR_ID, operadorID);
+        values.put(KEY_EVENTO_DATA, data);
+        values.put(KEY_EVENTO_HORA, hora);
+
+        mWritableDB.insert(TABLE_EVENTOS, null, values);
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<EventoProducao> listarEventos() {
+        return listarEventosFiltrados(null, null);
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<EventoProducao> listarEventosFiltrados(String data, String operadorID) {
+        ArrayList<EventoProducao> lista = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT * FROM " + TABLE_EVENTOS);
+        ArrayList<String> args = new ArrayList<>();
+
+        if (data != null || operadorID != null) {
+            sql.append(" WHERE ");
+            if (data != null) {
+                sql.append(KEY_EVENTO_DATA).append(" = ?");
+                args.add(data);
+            }
+            if (operadorID != null) {
+                if (data != null) sql.append(" AND ");
+                sql.append(KEY_EVENTO_OPERADOR_ID).append(" = ?");
+                args.add(operadorID);
+            }
+        }
+
+        sql.append(" ORDER BY ").append(KEY_EVENTO_ID).append(" DESC");
+
+        if (mReadableDB == null) mReadableDB = getReadableDatabase();
+
+        Cursor cursor = mReadableDB.rawQuery(sql.toString(), args.isEmpty() ? null : args.toArray(new String[0]));
+        if (cursor.moveToFirst()) {
+            do {
+                EventoProducao evento = new EventoProducao();
+                evento.setId(cursor.getInt(cursor.getColumnIndex(KEY_EVENTO_ID)));
+                evento.setTipo(cursor.getString(cursor.getColumnIndex(KEY_EVENTO_TIPO)));
+                evento.setHora(cursor.getString(cursor.getColumnIndex(KEY_EVENTO_HORA)));
+                evento.setData(cursor.getString(cursor.getColumnIndex(KEY_EVENTO_DATA)));
+                evento.setValor(cursor.getString(cursor.getColumnIndex(KEY_EVENTO_VALOR)));
+                evento.setOperadorID(cursor.getString(cursor.getColumnIndex(KEY_EVENTO_OPERADOR_ID)));
+                lista.add(evento);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return lista;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<String> listarDatasUnicas() {
+        ArrayList<String> datas = new ArrayList<>();
+        String sql = "SELECT DISTINCT " + KEY_EVENTO_DATA + " FROM " + TABLE_EVENTOS + " ORDER BY " + KEY_EVENTO_DATA + " DESC";
+        if (mReadableDB == null) mReadableDB = getReadableDatabase();
+        Cursor cursor = mReadableDB.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                datas.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return datas;
     }
 
 

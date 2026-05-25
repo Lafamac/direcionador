@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/img_tipo_evento"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icone_gleba_padrao"
+            android:padding="4dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:id="@+id/txt_evento_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pé Marcado #1"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/txt_evento_operador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Operador: João"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/txt_evento_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20/05/2026"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/txt_evento_hora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14:30:05"
+                android:textSize="12sp"
+                android:textStyle="italic"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

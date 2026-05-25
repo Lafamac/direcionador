@@ -36,14 +36,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class CentralizadorSistema extends AppCompatActivity implements Runnable, DialogWarning.DialogWarningListener {
 
     private ImageView[] imagens = {null, null, null, null, null, null, null, null, null, null, null, null, null};
-    private Button start, parar;
+    private Button start, parar, marcarPe;
     private ImageButton voltar;
     private SwitchCompat random, buzzer, manobra, media, moda, modaMovel;
     private TextView texto_segundos, textoAlerta;
     private SeekBar barraTempo;
     private Thread thread;
     private CentralizadorLEDs l;
-    private UDPProtocol UDP;
+    private SensorManager sensorManager;
     private MediaPlayer mp;
     private final AtomicBoolean controle_Thread = new AtomicBoolean(false);
     public static boolean rodando = false;
@@ -57,7 +57,9 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
     private final int som = R.raw.sound;
     private int totalReset, totalManobra;
     private int cont = 0, desalinhadoE = 0, desalinhadoD = 0, centralizado = 0;
+    private int contaPes = 0;
     private final static String TAG = "centralizadorDebug";
+    private final String separa_dados = "\n--------------------------------------------------\n";
     private String recebido, comando = "";
     private HelperDatabaseSQL helper;
     private final static int ERROR_CODE = -20;
@@ -91,7 +93,7 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
         }
 
         iniciarComponentes();
-        UDP = new UDPProtocol();
+        sensorManager = new SensorManager();
         helper = HelperDatabaseSQL.getInstance(this);
 
         if (numeroOperador != null) {
@@ -112,6 +114,7 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
         configStart();
         configParar();
         configVoltar();
+        configMarcarPe();
 
         mp = MediaPlayer.create(this, som);
         configuracaoInicial();
@@ -164,6 +167,7 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
         manobra = findViewById(R.id.manobra);
         start = findViewById(R.id.centSist_start);
         parar = findViewById(R.id.centSist_stop);
+        marcarPe = findViewById(R.id.centSist_marcarPe);
         voltar = findViewById(R.id.centSist_voltar);
         texto_segundos = findViewById(R.id.centSist_segundos);
         barraTempo = findViewById(R.id.centSist_barraTempo);
@@ -249,9 +253,28 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
         });
     }
 
+    private void configMarcarPe() {
+        if (marcarPe != null) {
+            marcarPe.setOnClickListener(v -> {
+                contaPes++;
+                
+                // Registrar no banco de dados (Profissional)
+                helper.registrarEvento("MARCAR_PE", String.valueOf(contaPes), numeroOperador);
+                
+                // Manter log em arquivo para compatibilidade
+                java.text.DateFormat formato_hora = java.text.DateFormat.getTimeInstance();
+                String hora = formato_hora.format(java.util.Calendar.getInstance().getTime());
+                String texto = "        Hora: " + hora + "\n        Número do Pé: " + contaPes + separa_dados;
+                com.example.inovaceifa.Utilities.Arquivo.writeFile(texto, this, "contaPes_operational.txt");
+                
+                Toast.makeText(this, "Pé #" + contaPes + " registrado no banco!", Toast.LENGTH_SHORT).show();
+            });
+        }
+    }
+
     private void enviaParams() {
         String msg = "params:" + angulo + ":" + distBarra + ":" + distMax + ":" + distMin + ":" + diam;
-        UDP.enviarMensagem(msg, 1234, this, sufixo_IP);
+        new UDPProtocol().enviarMensagem(msg, 1234, this, sufixo_IP);
     }
 
     private void configStart() {
@@ -285,6 +308,9 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
     private void stopThread() {
         controle_Thread.set(false);
         rodando = false;
+        if (thread != null && thread.isAlive()) {
+            thread.interrupt();
+        }
     }
 
     @Override
@@ -302,15 +328,8 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
     }
 
     private void executarUDP() {
-        if (random.isChecked()) {
-            // MODO SIMULAÇÃO: Gera um valor aleatório entre -6 e 6
-            int valSimulado = (int) (Math.random() * 13) - 6;
-            recebido = String.valueOf(valSimulado);
-            Log.d(TAG, "Simulação Ativa - Valor: " + recebido);
-        } else {
-            // Fluxo UDP Real
-            recebido = UDP.enviarEReceber(comando, 1234, this);
-        }
+        sensorManager.setModoSimulado(random.isChecked());
+        recebido = sensorManager.getDesalinhamento(comando, this);
 
         if (recebido != null && !recebido.isEmpty()) {
             runOnUiThread(() -> {
@@ -318,6 +337,11 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
                     // Atualiza os LEDs com o valor recebido
                     l.leds(recebido);
                     
+                    // Salva log de deslocamento se estiver rodando
+                    if (rodando) {
+                        com.example.inovaceifa.Utilities.Arquivo.writeFile(l.getValorArquivo(), this, "log_deslocamento.txt");
+                    }
+
                     // Log opcional para debug
                     Log.d(TAG, "Interface atualizada com: " + recebido);
                 } catch (Exception e) {
