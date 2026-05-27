@@ -44,7 +44,8 @@ Este arquivo descreve o passo a passo para validar cada funcionalidade do sistem
 2. Vá em **Área do Admin** -> **Ajustes**.
 3. Mude o valor de **Distância entre Barras** e clique em **Avançar**.
 4. **O que observar:**
-   - Verifique no console (Logcat) do Android Studio se a mensagem `enviar Mensagem params:...` foi disparada com sucesso.
+   - Verifique no console (Logcat) do Android Studio se a mensagem `params:diametro=...;minimo=...` foi disparada.
+   - O app deve mostrar um Toast de aviso apenas se o ESP32 **não** responder `OK params`.
 
 ### Teste 2.2: Resistência a Falhas (Timeout)
 1. Com o app em execução na tela operacional, **desligue a alimentação do ESP32** ou desconecte o Wi-Fi.

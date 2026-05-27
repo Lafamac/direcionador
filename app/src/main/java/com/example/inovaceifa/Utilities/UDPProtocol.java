@@ -76,6 +76,20 @@ public class UDPProtocol {
         return sendAndReceiveUDP(mensagem, UDP_SERVER_PORT, gateway);
     }
 
+    public String enviarEReceber(String mensagem, int UDP_SERVER_PORT, Context context, int sufixo) {
+        String gateway = Gateway.getGateway(context);
+        if (gateway == null) return null;
+
+        String aux = "";
+        int lastDot = gateway.lastIndexOf('.');
+        if (lastDot != -1) {
+            aux = gateway.substring(0, lastDot);
+            String newGateway = aux + "." + sufixo;
+            return sendAndReceiveUDP(mensagem, UDP_SERVER_PORT, newGateway);
+        }
+        return null;
+    }
+
     private String sendAndReceiveUDP(String mensagem, int UDP_SERVER_PORT, String gateway) {
         DatagramSocket sds = null;
         try {

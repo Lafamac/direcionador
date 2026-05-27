@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.inovaceifa.R;
 import com.example.inovaceifa.Utilities.DialogWarning;
@@ -424,7 +425,7 @@ public class CentralizadorAjustes extends AppCompatActivity implements DialogWar
             temp = MMath.StringParaFloat(campo_temp.getText().toString(), 0.0f);
             float tempoFixo = MMath.StringParaFloat(campo_tempoFixo.getText().toString(), 1.3f);
 
-            Log.d(TAG, "entroou aq");
+            Log.d(TAG, "Iniciando processo de salvamento e sincronização");
 
             if (tudo_preenchido()) {
                 if (tempoFixo < 1.0f || tempoFixo > 1.5f) {
@@ -432,52 +433,33 @@ public class CentralizadorAjustes extends AppCompatActivity implements DialogWar
                     caixaAviso();
                     return;
                 }
-                /*Thread t = new Thread(() -> {
-                    enviar("angulo:", angulo);
-                    pausarThread();
 
-                    enviar("maximo:", distBarra);
-                    pausarThread();
-
-                    enviar("minimo:", distMin);
-                    pausarThread();
-
-                    if (!tps_sensor){
-                        enviar("valido:", distMax);
-                        pausarThread();
-
-                        enviar("diametro:", diam);
-                        pausarThread();
-                    }
-
-                    enviar("confirmado");
-                    //pausarThread();
-                });
-                t.start();*/
+                // Sincronização robusta com ESP32 (Etapa de Segurança)
+                new Thread(() -> {
+                    SensorManager sm = new SensorManager();
+                    sm.setSufixoIP(sufixo_IP);
+                    // O valor 'valido' no protocolo do ESP32 parece corresponder ao distMax ou um parâmetro de corte
+                    boolean sincronizado = sm.enviarParametros(this, diam, distMin, distBarra, angulo, distMax);
+                    
+                    runOnUiThread(() -> {
+                        if (!sincronizado) {
+                            Toast.makeText(this, "Aviso: ESP32 não confirmou os parâmetros, mas os dados foram salvos localmente.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }).start();
 
                 Intent intent;
-
                 SwitchCompat tela2 = findViewById(R.id.centSens_pagina);
                 if (tela2.isChecked()) {
-                    intent = new Intent(CentralizadorAjustes.this,
-                            CentralizadorSistema2.class);
+                    intent = new Intent(CentralizadorAjustes.this, CentralizadorSistema2.class);
                 } else {
-                    intent = new Intent(CentralizadorAjustes.this,
-                            CentralizadorSistema.class);
+                    intent = new Intent(CentralizadorAjustes.this, CentralizadorSistema.class);
                 }
-
-                /*intent.putExtra("tempo", temp);
-                intent.putExtra("angulo", angulo);
-                intent.putExtra("distBarra", distBarra);
-                intent.putExtra("distMin", distMin);
-                intent.putExtra("distMax", distMax);
-                intent.putExtra("diam", diam);
-                intent.putExtra("tps", tps_sensor);*/
 
                 try {
                     salvarDados();
                 } catch (Exception e) {
-                    Log.d(TAG, ""+e);
+                    Log.e(TAG, "Erro ao salvar dados: " + e);
                 }
 
                 startActivity(intent);

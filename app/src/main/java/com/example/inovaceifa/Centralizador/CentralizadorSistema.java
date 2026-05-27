@@ -94,6 +94,7 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
 
         iniciarComponentes();
         sensorManager = new SensorManager();
+        sensorManager.setSufixoIP(sufixo_IP);
         helper = HelperDatabaseSQL.getInstance(this);
 
         if (numeroOperador != null) {
