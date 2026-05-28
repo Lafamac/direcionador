@@ -13,6 +13,9 @@ Este documento registra todas as evoluções feitas no projeto para solucionar o
 - **SensorManager:** Criada uma nova camada de gerenciamento de estado. Agora a interface não fala diretamente com a rede; ela solicita os dados ao `SensorManager`.
 - **Integração de Funcionalidades:** Toda a lógica funcional da versão experimental (`Sistema2`) foi migrada e estabilizada na tela operacional principal (`CentralizadorSistema`).
 - **Gestão de Threads (Ciclo de Vida):** Implementado o uso de `interrupt()` e `AtomicBoolean` para garantir que todas as threads UDP parem imediatamente ao fechar a tela, eliminando o consumo excessivo.
+- **Feedback Visual de Conexão:** A tela operacional agora exibe automaticamente um alerta caso o ESP32 pare de responder por mais de 1 segundo, limpando os LEDs para evitar informações obsoletas.
+- **Segurança Operacional:** Implementado bloqueio do botão "Voltar" físico (`onBackPressed`) para evitar saídas acidentais durante a operação.
+- **Reinício Remoto do Hardware:** Adicionado comando `restart` disparado por clique longo no botão Iniciar, facilitando a manutenção em campo sem acesso físico ao ESP32.
 
 ## 3. Banco de Dados e Persistência (Fase 9 - Profissionalização)
 - **Migração para Versão 2:** O banco de dados foi atualizado para suportar novos parâmetros sem perda de dados.
@@ -27,6 +30,7 @@ Este documento registra todas as evoluções feitas no projeto para solucionar o
 - **Acessibilidade:** Aumentado o tamanho das fontes (18sp) e a área de toque dos botões na área do administrador.
 - **Lógica de Orientação:** Corrigida a inversão das setas de correção. Agora o sistema indica corretamente para qual lado o operador deve girar o volante para centralizar a colheitadeira.
 - **Padronização de Controles:** Botões operacionais (**Simular**, **Iniciar/Pausar**, **Manobra** e **Marcar Pé**) agora possuem tamanhos e pesos visuais idênticos, garantindo uma interface equilibrada e profissional.
+- **Restauração de Elementos Visuais Clássicos:** O layout foi atualizado com base no `antigo.xml` para restaurar os medidores de altura laterais, mantendo as melhorias de performance e organização modernas.
 
 ## 5. Novas Funcionalidades
 - **Modo Simulação Realista:** Implementado um gerador de valores suavizado que simula o movimento real da máquina para testes de bancada.

@@ -47,13 +47,14 @@ Este arquivo descreve o passo a passo para validar cada funcionalidade do sistem
    - Verifique no console (Logcat) do Android Studio se a mensagem `params:diametro=...;minimo=...` foi disparada.
    - O app deve mostrar um Toast de aviso apenas se o ESP32 **não** responder `OK params`.
 
-### Teste 2.2: Resistência a Falhas (Timeout)
+### Teste 2.2: Resistência a Falhas (Timeout e Feedback Visual)
 1. Com o app em execução na tela operacional, **desligue a alimentação do ESP32** ou desconecte o Wi-Fi.
 2. Clique em **Iniciar**.
 3. **O que observar:**
    - O aplicativo **não pode travar**.
-   - O sistema deve tentar a conexão, respeitar o timeout de 1 segundo e continuar operando (Logcat deve mostrar "Falha de comunicação").
-   - Você deve conseguir clicar em **Pausar** ou **Voltar** sem atrasos significativos.
+   - O sistema deve tentar a conexão, respeitar o timeout de 1 segundo e continuar operando.
+   - **Feedback Visual:** O texto de alerta ("Verifique a conexão Wi-Fi...") deve aparecer na tela e os LEDs/setas devem ser apagados.
+   - Ao ligar o ESP32 novamente, o alerta deve desaparecer e os LEDs voltarem a funcionar automaticamente no próximo ciclo.
 
 ### Teste 2.3: Controle de Tempo Operacional
 1. Vá em **Ajustes** e desmarque a opção **"Liberar Scroll para Operador"**.

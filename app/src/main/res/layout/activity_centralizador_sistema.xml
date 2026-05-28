@@ -7,11 +7,38 @@
     android:background="@color/color_9"
     tools:context=".Centralizador.CentralizadorSistema">
 
-    <!-- Seção Superior: Barra de Tempo e Voltar -->
+    <!-- GUIDELINES DE ESTRUTURA -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_Cent1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="100dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_Cent30H"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <!-- ELEMENTOS DO TOPO -->
+    <ImageButton
+        android:id="@+id/centSist_voltar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_fundo"
+        android:elevation="10dp"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/__removebg_preview_removebg_preview" />
+
     <SeekBar
         android:id="@+id/centSist_barraTempo"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="48dp"
         android:max="6"
         android:progressDrawable="@drawable/seekbar_style"
         android:splitTrack="false"
@@ -19,366 +46,200 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5" />
+        app:layout_constraintWidth_percent="0.4" />
 
     <TextView
         android:id="@+id/centSist_segundos"
         style="@style/CamposDeTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:textSize="13sp"
         android:text="1.0 segundo(s)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/centSist_barraTempo" />
 
-    <TextView
-        android:id="@+id/textoAlerta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+    <!-- SETAS PRETAS LATERAIS (FIXAS NAS EXTREMIDADES) -->
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="65dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/centSist_voltar"
+        app:srcCompat="@drawable/seta_medida_altura3" />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/centSist_media"
-        style="@style/CamposDeTexto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/media"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/centSist_moda"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/centSist_segundos" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/centSist_moda"
-        style="@style/CamposDeTexto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/moda"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/centSist_movel"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/centSist_media"
-        app:layout_constraintTop_toBottomOf="@+id/centSist_segundos" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/centSist_movel"
-        style="@style/CamposDeTexto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/modaMovel"
-        android:visibility="gone"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="65dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="5dp"
+        android:scaleX="-1"
+        app:layout_constraintBottom_toTopOf="@+id/botoes_centralizador_sistema"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/centSist_moda"
-        app:layout_constraintTop_toBottomOf="@+id/centSist_segundos" />
+        app:srcCompat="@drawable/seta_medida_altura3" />
 
-    <ImageButton
-        android:id="@+id/centSist_voltar"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@drawable/custom_fundo"
-        android:elevation="10dp"
-        android:scaleType="centerInside"
-        app:layout_constraintStart_toStartOf="parent"
+    <!-- MEDIDORES DE ALTURA (AFASTADOS DAS SETAS PRETAS) -->
+    <ImageView
+        android:id="@+id/centSist_ledAltura1E"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp"
-        app:srcCompat="@drawable/__removebg_preview_removebg_preview" />
+        app:srcCompat="@drawable/medidor_altura2" />
 
-    <!-- Guia para as Setas (Acima dos LEDs) -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_topo_setas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
+    <ImageView
+        android:id="@+id/centSist_ledAltura1D"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/medidor_altura2" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_base_setas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.30" />
+    <!-- SETAS DE DIREÇÃO (AJUSTADAS PARA MAIS PRÓXIMO DO CENTRO) -->
+    <ImageView
+        android:id="@+id/centSist_setaEsquerda"
+        android:layout_width="220dp"
+        android:layout_height="140dp"
+        android:rotation="0"
+        android:scaleType="centerInside"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/guide_Cent30H"
+        app:layout_constraintEnd_toStartOf="@+id/centSist_ledAltura1D"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toEndOf="@+id/centSist_ledAltura1E"
+        app:layout_constraintTop_toBottomOf="@+id/centSist_segundos"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/vm" />
 
     <ImageView
         android:id="@+id/centSist_setaDireita"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:elevation="25dp"
+        android:layout_width="220dp"
+        android:layout_height="140dp"
         android:rotation="180"
         android:scaleType="centerInside"
-        android:src="@drawable/vm"
-        app:layout_constraintBottom_toTopOf="@+id/guide_base_setas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guide_topo_setas"
-        app:layout_constraintHorizontal_bias="0.95" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/guide_Cent30H"
+        app:layout_constraintEnd_toStartOf="@+id/centSist_ledAltura1D"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toEndOf="@+id/centSist_ledAltura1E"
+        app:layout_constraintTop_toBottomOf="@+id/centSist_segundos"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/vm" />
 
-    <ImageView
-        android:id="@+id/centSist_setaEsquerda"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:elevation="25dp"
-        android:rotation="0"
-        android:scaleType="centerInside"
-        android:src="@drawable/vm"
-        app:layout_constraintBottom_toTopOf="@+id/guide_base_setas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guide_topo_setas"
-        app:layout_constraintHorizontal_bias="0.05" />
-
-    <!-- Seção Central: LEDs -->
+    <!-- PAINEL CENTRAL DE LEDS -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/LinearLayout"
         android:layout_width="0dp"
-        android:layout_height="140dp"
+        android:layout_height="130dp"
         android:background="@drawable/fundo_transparente_borda"
-        android:elevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/guide_controles"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guide_base_setas"
-        app:layout_constraintWidth_percent="0.98">
+        android:elevation="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/guide_Cent1"
+        app:layout_constraintEnd_toStartOf="@+id/centSist_ledAltura1D"
+        app:layout_constraintStart_toEndOf="@+id/centSist_ledAltura1E"
+        app:layout_constraintTop_toTopOf="@+id/guide_Cent30H"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintWidth_percent="0.7">
 
-        <ImageView
-            android:id="@+id/centSist_led1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/led_vermelho_esquerda" />
-
-        <ImageView
-            android:id="@+id/centSist_led2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led3"
-            app:layout_constraintStart_toEndOf="@id/centSist_led1"
-            app:srcCompat="@drawable/led_vermelho" />
-
-        <ImageView
-            android:id="@+id/centSist_led3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led4"
-            app:layout_constraintStart_toEndOf="@+id/centSist_led2"
-            app:srcCompat="@drawable/led_amarelo" />
-
-        <ImageView
-            android:id="@+id/centSist_led4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led5"
-            app:layout_constraintStart_toEndOf="@+id/centSist_led3"
-            app:srcCompat="@drawable/led_amarelo" />
-
-        <ImageView
-            android:id="@+id/centSist_led5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led6"
-            app:layout_constraintStart_toEndOf="@+id/centSist_led4"
-            app:srcCompat="@drawable/led_verde" />
-
-        <ImageView
-            android:id="@+id/centSist_led6"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_ledCentral"
-            app:layout_constraintStart_toEndOf="@+id/centSist_led5"
-            app:srcCompat="@drawable/led_verde" />
-
-        <ImageView
-            android:id="@+id/centSist_ledCentral"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led7"
-            app:layout_constraintStart_toEndOf="@+id/centSist_led6"
-            app:srcCompat="@drawable/led_central" />
-
-        <ImageView
-            android:id="@+id/centSist_led7"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led8"
-            app:layout_constraintStart_toEndOf="@+id/centSist_ledCentral"
-            app:srcCompat="@drawable/led_verde" />
-
-        <ImageView
-            android:id="@+id/centSist_led8"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led9"
-            app:layout_constraintStart_toEndOf="@+id/centSist_led7"
-            app:srcCompat="@drawable/led_verde" />
-
-        <ImageView
-            android:id="@+id/centSist_led9"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led10"
-            app:layout_constraintStart_toEndOf="@+id/centSist_led8"
-            app:srcCompat="@drawable/led_amarelo" />
-
-        <ImageView
-            android:id="@+id/centSist_led10"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led11"
-            app:layout_constraintStart_toEndOf="@+id/centSist_led9"
-            app:srcCompat="@drawable/led_amarelo" />
-
-        <ImageView
-            android:id="@+id/centSist_led11"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toStartOf="@id/centSist_led12"
-            app:layout_constraintStart_toEndOf="@+id/centSist_led10"
-            app:srcCompat="@drawable/led_vermelho" />
-
-        <ImageView
-            android:id="@+id/centSist_led12"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_marginStart="2dp"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/centSist_led11"
-            app:srcCompat="@drawable/led_vermelho_direita" />
+        <ImageView android:id="@+id/centSist_led1" android:layout_width="0dp" android:layout_height="match_parent" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led2" app:layout_constraintStart_toStartOf="parent" app:srcCompat="@drawable/led_vermelho_esquerda" />
+        <ImageView android:id="@+id/centSist_led2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led3" app:layout_constraintStart_toEndOf="@id/centSist_led1" app:srcCompat="@drawable/led_vermelho" />
+        <ImageView android:id="@+id/centSist_led3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led4" app:layout_constraintStart_toEndOf="@id/centSist_led2" app:srcCompat="@drawable/led_amarelo" />
+        <ImageView android:id="@+id/centSist_led4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led5" app:layout_constraintStart_toEndOf="@id/centSist_led3" app:srcCompat="@drawable/led_amarelo" />
+        <ImageView android:id="@+id/centSist_led5" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led6" app:layout_constraintStart_toEndOf="@id/centSist_led4" app:srcCompat="@drawable/led_verde" />
+        <ImageView android:id="@+id/centSist_led6" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_ledCentral" app:layout_constraintStart_toEndOf="@+id/centSist_led5" app:srcCompat="@drawable/led_verde" />
+        <ImageView android:id="@+id/centSist_ledCentral" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led7" app:layout_constraintStart_toEndOf="@+id/centSist_led6" app:srcCompat="@drawable/led_central" />
+        <ImageView android:id="@+id/centSist_led7" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led8" app:layout_constraintStart_toEndOf="@+id/centSist_ledCentral" app:srcCompat="@drawable/led_verde" />
+        <ImageView android:id="@+id/centSist_led8" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led9" app:layout_constraintStart_toEndOf="@+id/centSist_led7" app:srcCompat="@drawable/led_verde" />
+        <ImageView android:id="@+id/centSist_led9" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led10" app:layout_constraintStart_toEndOf="@+id/centSist_led8" app:srcCompat="@drawable/led_amarelo" />
+        <ImageView android:id="@+id/centSist_led10" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led11" app:layout_constraintStart_toEndOf="@+id/centSist_led9" app:srcCompat="@drawable/led_amarelo" />
+        <ImageView android:id="@+id/centSist_led11" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toStartOf="@id/centSist_led12" app:layout_constraintStart_toEndOf="@+id/centSist_led10" app:srcCompat="@drawable/led_vermelho" />
+        <ImageView android:id="@+id/centSist_led12" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="1dp" android:scaleType="fitXY" app:layout_constraintHorizontal_weight="1" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/centSist_led11" app:srcCompat="@drawable/led_vermelho_direita" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Seção Inferior: Controles -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_controles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.80" />
-
+    <!-- BARRA DE CONTROLE INFERIOR (CENTRALIZADA E COM BOM ESPAÇAMENTO) -->
     <LinearLayout
         android:id="@+id/botoes_centralizador_sistema"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:paddingHorizontal="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guide_controles">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guide_Cent1">
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/random"
             style="@style/CamposDeTexto"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="2dp"
-            android:gravity="center"
+            android:layout_marginHorizontal="15dp"
             android:text="Simular"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
 
         <FrameLayout
-            android:layout_width="0dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="2dp">
-
+            android:layout_marginHorizontal="10dp">
             <Button
                 android:id="@+id/centSist_start"
                 style="@style/textoBotoes"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
+                android:layout_height="45dp"
                 android:text="@string/botaoIniciar"
-                android:textSize="12sp"
-                android:padding="0dp" />
-
+                android:textSize="14sp" />
             <Button
                 android:id="@+id/centSist_stop"
                 style="@style/textoBotoes"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
+                android:layout_height="45dp"
                 android:text="@string/botaoPausar"
-                android:textSize="12sp"
-                android:padding="0dp"
+                android:textSize="14sp"
                 android:visibility="gone" />
         </FrameLayout>
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/manobra"
-            style="@style/CamposDeTexto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="2dp"
-            android:gravity="center"
-            android:text="@string/manobra"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:textSize="12sp" />
 
         <Button
             android:id="@+id/centSist_marcarPe"
             style="@style/textoBotoes"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="2dp"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="10dp"
             android:text="Marcar Pé"
-            android:textSize="12sp"
-            android:padding="0dp" />
+            android:textSize="14sp" />
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/manobra"
+            style="@style/CamposDeTexto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:text="@string/manobra"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="13sp" />
     </LinearLayout>
 
+    <!-- FEEDBACK DE ALERTA -->
+    <TextView
+        android:id="@+id/textoAlerta"
+        style="@style/textoBoldBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alerta"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/LinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/centSist_segundos" />
 
-    <!-- Elementos ocultos -->
-    <ImageView android:id="@+id/centSist_ledAltura1D" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
-    <ImageView android:id="@+id/centSist_ledAltura1E" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
-    <ImageView android:id="@+id/imageView3" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
-    <ImageView android:id="@+id/imageView2" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+    <!-- Compatibilidade com código Java -->
+    <androidx.appcompat.widget.SwitchCompat android:id="@+id/centSist_media" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.SwitchCompat android:id="@+id/centSist_moda" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.SwitchCompat android:id="@+id/centSist_movel" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

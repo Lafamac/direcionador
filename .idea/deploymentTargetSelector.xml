@@ -4,29 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-05-25T21:31:47.418438800Z">
+        <DropdownSelection timestamp="2026-05-28T10:58:06.300959900Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=VSTWCMBUQSUOIVZH" />
-            </handle>
-          </Target>
-        </DropdownSelection>
-        <DialogSelection>
-          <targets>
-            <Target type="DEFAULT_BOOT">
-              <handle>
-                <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\lafam\.android\avd\Medium_Tablet.avd" />
-              </handle>
-            </Target>
-          </targets>
-        </DialogSelection>
-      </SelectionState>
-      <SelectionState runConfigName="New Run Config">
-        <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-05-25T18:10:55.695298Z">
-          <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\lafam\.android\avd\Pixel_10_Pro.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\User\.android\avd\Medium_Tablet_API_30.avd" />
             </handle>
           </Target>
         </DropdownSelection>

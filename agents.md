@@ -1376,13 +1376,13 @@ UDP
 - [x] Telas principais existentes
 - [x] LEDs existentes
 - [x] UDP implementado
-- [ ] `UDPProtocol.java` revisado
-- [ ] Timeout UDP implementado
-- [ ] `CentralizadorSistema.java` corrigido
-- [ ] Thread operacional estabilizada
-- [ ] UI Thread protegida
-- [ ] Modo simulado criado
-- [ ] LEDs validados
+- [x] `UDPProtocol.java` revisado
+- [x] Timeout UDP implementado
+- [x] `CentralizadorSistema.java` corrigido
+- [x] Thread operacional estabilizada
+- [x] UI Thread protegida
+- [x] Modo simulado criado
+- [x] LEDs validados
 - [ ] Teste com ESP32 realizado
 - [ ] Teste em multimídia realizado
 

@@ -151,7 +151,7 @@ public class CentralizadorPrincipal extends AppCompatActivity implements DialogI
     @Override
     public void setTitleInsertDialog(AlertDialog ad) {
         if (ad != null) {
-            ad.setTitle("aAcesso à área de cadastro do usuário");
+            ad.setTitle("Acesso à área de cadastro do usuário");
         }
     }
 }

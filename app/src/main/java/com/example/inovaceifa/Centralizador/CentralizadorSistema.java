@@ -192,7 +192,25 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
         l = new CentralizadorLEDs(imagens, setaD, setaE);
     }
 
-    private void configRestartESP() { }
+    private void configRestartESP() {
+        if (start != null) {
+            // Um clique longo no botão Iniciar envia o comando de restart ao ESP32
+            start.setOnLongClickListener(v -> {
+                new Thread(() -> {
+                    String resp = new UDPProtocol().enviarEReceber("restart", 1234, this, sufixo_IP);
+                    runOnUiThread(() -> {
+                        if (resp != null) {
+                            Toast.makeText(this, "Comando de Reinício enviado ao ESP32", Toast.LENGTH_SHORT).show();
+                            enviaParams(); // Re-envia os parâmetros após o restart
+                        } else {
+                            Toast.makeText(this, "Falha ao alcançar o ESP32 para Reinício", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }).start();
+                return true;
+            });
+        }
+    }
 
     private void configParar() {
         parar.setOnClickListener(v -> {
@@ -274,8 +292,8 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
     }
 
     private void enviaParams() {
-        String msg = "params:" + angulo + ":" + distBarra + ":" + distMax + ":" + distMin + ":" + diam;
-        new UDPProtocol().enviarMensagem(msg, 1234, this, sufixo_IP);
+        // Usa o sensorManager para enviar parâmetros no formato robusto esperado pelo firmware
+        sensorManager.enviarParametros(this, diam, distMin, distBarra, angulo, distMax);
     }
 
     private void configStart() {
@@ -342,9 +360,12 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
 
         recebido = sensorManager.getDesalinhamento(comando, this);
 
-        if (recebido != null && !recebido.isEmpty()) {
-            runOnUiThread(() -> {
+        runOnUiThread(() -> {
+            if (recebido != null && !recebido.isEmpty()) {
                 try {
+                    // Esconde o alerta em caso de sucesso
+                    textoAlerta.setVisibility(View.GONE);
+                    
                     // Atualiza os LEDs com o valor recebido
                     l.leds(recebido);
                     
@@ -357,11 +378,14 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
                 } catch (Exception e) {
                     Log.e(TAG, "Erro ao atualizar interface: " + e.getMessage());
                 }
-            });
-        } else {
-            // Em caso de falha de comunicação (Timeout)
-            Log.w(TAG, "Falha de comunicação com ESP32");
-        }
+            } else if (!random.isChecked()) {
+                // Em caso de falha de comunicação (Timeout) e não estiver em simulação
+                Log.w(TAG, "Falha de comunicação com ESP32");
+                textoAlerta.setVisibility(View.VISIBLE);
+                l.apagaLEDs();
+                l.apagaSetas();
+            }
+        });
     }
 
     private void configMedia() {
@@ -402,6 +426,12 @@ public class CentralizadorSistema extends AppCompatActivity implements Runnable,
 
     @Override
     public void onButtonClicked() { }
+
+    @Override
+    public void onBackPressed() {
+        // Bloqueia o botão voltar do Android para evitar saídas acidentais durante a colheita
+        Toast.makeText(this, "Utilize o botão de retorno da interface para sair.", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void setTextViewVisibilities(TextView tv1, TextView tv2, TextView tv3) {
